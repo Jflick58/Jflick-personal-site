@@ -1,0 +1,175 @@
+@import 'button';
+// @import 'posts';
+
+body {
+    font-family: "Spartan";
+    margin: 0;
+  }
+  
+  .site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  
+  .site-content {
+    padding: 0 4rem;
+    flex-grow: 1;
+    margin-top: 6vh;
+  }
+
+  .footer {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    display: flex;
+    justify-content:space-between
+}
+
+.footer__copyright {
+    // border-bottom: 2px solid #f9d5ff;
+    font-size:1.0rem
+}
+
+  .post-list__item {
+    display: flex;
+    flex-direction: row;
+    @media (max-width: 500px) {
+      flex-direction: column;
+      text-align: center;
+    }
+    padding: 1rem;
+  }
+  .post-list__thumbnail {
+    padding: 1rem;
+  }
+  
+  .post-list__content {
+    padding: 1rem;
+    text-align: left;
+  }
+  
+  .taglist {
+    padding: 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      padding: 2px;
+      border: solid black 1px;
+      margin: 2px;
+    }
+  }
+
+  .split {
+    display: flex;
+  }
+  
+  .left {
+    flex: 70%;
+    padding-top: 1%;
+    padding-right: 1%;
+  }
+
+  .right {
+    flex: 30%;
+    padding-top: 1%;
+    padding-right: 1%;
+
+  }
+  
+  .page-navigation {
+    text-align: center;
+    a {
+      padding: 0.5rem;
+    }
+  }
+  .profile-pic{
+    padding: 7%;
+    min-width: 250px;
+    width: 75%;
+    height: auto;
+    border-radius: 65%;
+  }
+
+  .social {
+    filter: opacity(30%);
+    image-rendering: auto;
+    min-width: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+    height: auto;
+  }
+  .company-logo{
+    image-rendering: auto;
+    min-width: 125px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    height: auto;
+  }
+  .emphasis {
+    color: turquoise;
+  }
+  .project-list {
+    margin: 0;
+  }
+  .project-list__item {
+    display: flex;
+    flex-direction: column;
+    @media (min-width: 700px) {
+      flex-direction: row;
+    }
+    padding: 1rem;
+  }
+  .project-list__thumbnail {
+    width: 100%;
+    align-self: center;
+  }
+  
+  .project-list__excerpt {
+    padding-bottom: 2rem;
+  }
+  .project-list__content {
+    padding: 1rem;
+    text-align: left;
+  }
+
+  header {
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 0px 1.0875rem 1.45rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    @media screen and (max-width: 100px) {
+      flex-direction: column;
+    }
+    a {
+      font-family: "Spartan";
+      font-weight: 700;
+      text-decoration: none;
+      color: turquoise;
+    }
+  }
+  
+  .header__title {
+    @media (max-width: 500px) {
+      align-self: center;
+    }
+    color: rebeccapurple;
+  }
+  nav {
+    align-self: center;
+    display: inline-block;
+    a {
+      padding: 0 1rem;
+      text-decoration: none;
+      font-family: "Spartan";
+      font-weight: 100;
+      text-decoration: none;
+      color: black
+    }
+  }
