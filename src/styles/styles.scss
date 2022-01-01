@@ -5,6 +5,11 @@ body {
     font-family: "Spartan";
     margin: 0;
   }
+
+  .title-link {
+    text-decoration: none;
+    color:rgba(0, 0, 0, 0.5);
+  }
   
   .site {
     display: flex;
