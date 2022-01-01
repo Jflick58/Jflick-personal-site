@@ -1,11 +1,13 @@
 [
     {
-      "title": "My First Project",
-      "date": "2018-08",
+      "title": "DepressionAI",
+      "date": "2018-01",
       "description":
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum repudiandae, autem eos voluptatum assumenda cum laborum iure nam in accusantium.",
-      "url": "https://example.com",
-      "thumbnailImage": "../images/norcal-beach.jpg"
+        "DepressionAI is an Amazon Alexa Skill intended to help folks who are suffering from depression by encouraging them to perform daily tasks. It can also detect suicidal intent and provide information about the National Suicide Prevention Hotline. 
+        
+        This was built during the 2018 Valley Hackathon, and as such the core development (including the primary intents) was done over 24 hours. The linked Github page for the project provides additional detail.",
+      "url": "https://github.com/Jflick58/DepressionAI",
+      "thumbnailImage": "https://github.com/Jflick58/DepressionAI/blob/master/Screenshots/depression%20ai.png?raw=true"
     },
     {
       "title": "My Second Project",
