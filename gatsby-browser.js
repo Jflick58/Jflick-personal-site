@@ -5,7 +5,7 @@
  */
 
 // You can delete this file if you're not using it
+import "@fontsource/spartan" // Defaults to weight 400 with all styles included.
 
 require('prismjs/themes/prism-tomorrow.css');
 require('prismjs/plugins/line-numbers/prism-line-numbers.css');
-import "@fontsource/spartan" // Defaults to weight 400 with all styles included.

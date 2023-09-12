@@ -22,13 +22,13 @@ const BlogPage = ({ data, pageContext }) => {
       <div className="post-list">
         {posts.map(post => (
           <div key={post.node.id} className="post-list__item">
-            {/* <div className="post-list__thumbnail">
+            <div className="post-list__thumbnail">
               <Link to={post.node.fields.slug}>
                 <Img
                   fixed={post.node.frontmatter.thumbnail.childImageSharp.fixed}
                 />
               </Link>
-            </div> */}
+            </div>
             <div className="post-list__content">
               <h2><Link class="title-link" to={post.node.fields.slug}>{post.node.frontmatter.title}</Link></h2>
               {/* {post.node.frontmatter.tags ? (
@@ -42,10 +42,10 @@ const BlogPage = ({ data, pageContext }) => {
                   </ul>
                 </div>
               ) : null}  */}
-              {/* <p>{post.node.frontmatter.date}</p> */}
-              {/* <div className="post-list__excerpt">
+              <p>{post.node.frontmatter.date}</p>
+              <div className="post-list__excerpt">
                 <p>{post.node.excerpt}</p>
-              </div> */}
+              </div>
               <Link className="button button--small" to={post.node.fields.slug}>
                 Read More
               </Link>
