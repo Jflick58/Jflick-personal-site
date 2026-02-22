@@ -2,11 +2,7 @@
   <div class="wrapper">
     <div class="footer-inner">
       <span>{{ site.title | escape }}</span>
-      <span>
-        {%- for link in site.minima.social_links -%}
-          <a href="{{ link.user_url }}" target="_blank" rel="noopener">{{ link.platform }}</a>
-        {%- endfor -%}
-      </span>
+      <a href="{{ "/feed.xml" | relative_url }}">RSS</a>
     </div>
   </div>
 </footer>

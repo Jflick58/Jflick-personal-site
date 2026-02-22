@@ -3,20 +3,24 @@
 ---
 
 // ============================================================
-// Variables
+// Variables — inspired by oak slats, white countertops, brass
 // ============================================================
 
-$serif:  'Playfair Display', Georgia, 'Times New Roman', serif;
+$serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
 $sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 $mono:   'DM Mono', 'Courier New', monospace;
 
-// Warm espresso palette
-$bg:          #f8f6f2;
-$bg-subtle:   #edeae3;
-$text:        #1a1814;
-$text-muted:  #7a7268;
-$accent:      #5c3a1e;
-$border:      #ddd7cc;
+// The palette
+$bg:           #f8f7f4;   // warm wall white
+$white:        #ffffff;   // countertop white
+$wood:         #c49468;   // oak slat
+$wood-dark:    #8c6642;   // shadow between slats
+$wood-light:   #dbb98a;   // highlight face of slat
+$brass:        #b89048;   // pendant fixtures
+$concrete:     #dedbd5;   // floor / subtle borders
+$text:         #18171a;   // near black
+$text-muted:   #706a62;   // warm concrete gray
+$border:       #e4e0d9;   // light warm border
 
 // ============================================================
 // Reset & Base
@@ -42,43 +46,45 @@ body {
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 a {
-  color: $accent;
+  color: $brass;
   text-decoration: none;
   transition: color 0.15s ease;
-  &:hover { color: #3d2410; }
+  &:hover { color: $wood-dark; }
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+img { max-width: 100%; height: auto; display: block; }
+
 
 // ============================================================
 // Layout
 // ============================================================
 
 .wrapper {
-  max-width: 720px;
+  max-width: 740px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 28px;
-  padding-right: 28px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 .page-content {
-  min-height: calc(100vh - 200px);
+  flex: 1;
 }
 
 // ============================================================
-// Header
+// Header — the crisp white countertop
 // ============================================================
 
 .site-header {
-  padding: 36px 0 32px;
+  background: $white;
+  padding: 28px 0 24px;
+  border-top: 3px solid $wood;
   border-bottom: 1px solid $border;
 
   .wrapper {
@@ -90,22 +96,26 @@ img {
 
 .site-title {
   font-family: $serif;
-  font-size: 1.375rem;
-  font-weight: 700;
-  font-style: italic;
+  font-size: 1.25rem;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: $text;
   text-decoration: none;
-  letter-spacing: -0.01em;
 
-  &:hover { color: $accent; }
+  &:hover { color: $brass; }
 }
 
 .site-nav {
+  display: flex;
+  gap: 24px;
+
   .page-link {
     font-family: $mono;
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     font-weight: 300;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: $text-muted;
     text-decoration: none;
@@ -119,30 +129,30 @@ img {
 // ============================================================
 
 .home {
-  padding: 64px 0 88px;
+  padding: 72px 0 96px;
 }
 
 .home-intro {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   line-height: 1.85;
   color: $text-muted;
-  max-width: 580px;
-  margin-bottom: 72px;
+  max-width: 560px;
+  margin-bottom: 56px;
+  font-weight: 300;
 
-  strong { color: $text; font-weight: 500; }
-  em { font-style: italic; color: $text; }
+  p + p { margin-top: 1.25em; }
+  strong { color: $text; font-weight: 400; }
 }
 
 .posts-label {
   font-family: $mono;
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 300;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: $text-muted;
-  padding-bottom: 18px;
+  padding-bottom: 20px;
   border-bottom: 1px solid $border;
-  margin-bottom: 0;
 }
 
 .post-list {
@@ -151,124 +161,158 @@ img {
   padding: 0;
 
   li {
-    padding: 26px 0;
-    border-bottom: 1px solid $border;
     display: flex;
     flex-direction: column;
     gap: 6px;
+    padding: 28px 0 28px 16px;
+    border-bottom: 1px solid $border;
+    border-left: 2px solid $wood;
+    transition: border-color 0.2s ease;
+
+    &:hover {
+      border-left-color: $brass;
+    }
   }
 
   .post-meta {
     font-family: $mono;
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     font-weight: 300;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.1em;
     color: $text-muted;
   }
 
   h3 {
     font-family: $serif;
-    font-size: 1.3125rem;
-    font-weight: 700;
-    line-height: 1.3;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.25;
     margin: 0;
   }
 
   .post-link {
     color: $text;
     text-decoration: none;
-
-    &:hover { color: $accent; }
+    &:hover { color: $brass; }
   }
 }
 
 // ============================================================
-// Post Page
+// Post Page — reading surface, like the white countertop
 // ============================================================
 
 .post {
-  padding: 64px 0 88px;
+  padding: 72px 0 96px;
 }
 
 .post-header {
-  margin-bottom: 52px;
+  margin-bottom: 56px;
   padding-bottom: 40px;
-  border-bottom: 1px solid $border;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: repeating-linear-gradient(
+      to right,
+      $wood-dark  0px,
+      $wood       1px,
+      $wood-light 3px,
+      $wood       5px,
+      $wood-dark  6px,
+      transparent 6px,
+      transparent 8px
+    );
+    opacity: 0.4;
+  }
 }
 
 .post-title {
   font-family: $serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  line-height: 1.18;
-  letter-spacing: -0.02em;
+  font-size: 3rem;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   color: $text;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .post-meta {
   font-family: $mono;
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 300;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: $text-muted;
 }
+
+// ============================================================
+// Post Content
+// ============================================================
 
 .post-content {
   font-size: 1.0625rem;
   line-height: 1.82;
+  font-weight: 300;
 
   h2 {
     font-family: $serif;
-    font-size: 1.625rem;
-    font-weight: 700;
-    line-height: 1.25;
+    font-size: 1.875rem;
+    font-weight: 400;
+    line-height: 1.2;
     color: $text;
-    margin-top: 3em;
-    margin-bottom: 0.75em;
+    margin-top: 3.5em;
+    margin-bottom: 0.8em;
   }
 
   h3 {
     font-family: $serif;
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-size: 1.375rem;
+    font-weight: 400;
     color: $text;
     margin-top: 2.5em;
     margin-bottom: 0.6em;
   }
 
   p {
-    margin-bottom: 1.5em;
+    margin-bottom: 1.6em;
     &:last-child { margin-bottom: 0; }
   }
 
   a {
-    color: $accent;
+    color: $brass;
     text-decoration: underline;
-    text-decoration-color: rgba($accent, 0.3);
-    text-underline-offset: 2px;
-    &:hover { text-decoration-color: $accent; }
+    text-decoration-color: rgba($brass, 0.35);
+    text-underline-offset: 3px;
+    &:hover { text-decoration-color: $brass; }
   }
 
-  strong { font-weight: 600; color: $text; }
+  strong { font-weight: 500; color: $text; }
   em { font-style: italic; }
 
   ul, ol {
-    padding-left: 1.6em;
-    margin-bottom: 1.5em;
-
+    padding-left: 1.5em;
+    margin-bottom: 1.6em;
     li {
       margin-bottom: 0.5em;
-      &::marker { color: $text-muted; }
+      font-weight: 300;
+      &::marker { color: $wood; }
     }
   }
 
   blockquote {
-    border-left: 2px solid $border;
-    margin: 2em 0;
-    padding: 2px 0 2px 24px;
+    border-left: 2px solid $wood;
+    margin: 2.5em 0;
+    padding: 4px 0 4px 28px;
     color: $text-muted;
     font-style: italic;
+    font-family: $serif;
+    font-size: 1.2rem;
+    line-height: 1.6;
     p:last-child { margin-bottom: 0; }
   }
 
@@ -276,23 +320,26 @@ img {
     font-family: $mono;
     font-size: 0.875em;
     font-weight: 400;
-    background-color: $bg-subtle;
-    color: $accent;
+    background-color: $white;
+    color: $wood-dark;
+    border: 1px solid $border;
     padding: 2px 6px;
-    border-radius: 3px;
+    border-radius: 2px;
   }
 
   pre {
-    background-color: $bg-subtle;
+    background-color: $white;
     border: 1px solid $border;
-    border-radius: 6px;
-    padding: 20px 24px;
-    margin-bottom: 1.5em;
+    border-left: 3px solid $wood;
+    border-radius: 3px;
+    padding: 24px 28px;
+    margin-bottom: 1.6em;
     overflow-x: auto;
 
     code {
       background: none;
       color: $text;
+      border: none;
       padding: 0;
       font-size: 0.875rem;
     }
@@ -300,25 +347,29 @@ img {
 
   hr {
     border: none;
-    border-top: 1px solid $border;
-    margin: 3em 0;
+    height: 1px;
+    background: $border;
+    margin: 3.5em 0;
   }
 }
 
+// ============================================================
+// Post Footer
+// ============================================================
+
 .post-footer {
-  margin-top: 56px;
+  margin-top: 64px;
   padding-top: 32px;
   border-top: 1px solid $border;
 
   .back-link {
     font-family: $mono;
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     font-weight: 300;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: $text-muted;
     text-decoration: none;
-
     &:hover { color: $text; }
   }
 }
@@ -329,6 +380,7 @@ img {
 
 .site-footer {
   padding: 28px 0;
+  background: $white;
   border-top: 1px solid $border;
 }
 
@@ -337,16 +389,22 @@ img {
   align-items: center;
   justify-content: space-between;
   font-family: $mono;
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 300;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: $text-muted;
 
   a {
     color: $text-muted;
     text-decoration: none;
-    &:hover { color: $text; }
+    &:hover { color: $brass; }
   }
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
 }
 
 // ============================================================
@@ -354,12 +412,7 @@ img {
 // ============================================================
 
 @media (max-width: 600px) {
-  .post-title {
-    font-size: 1.875rem;
-  }
-
-  .wrapper {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+  .wrapper { padding-left: 20px; padding-right: 20px; }
+  .post-title { font-size: 2.25rem; }
+  .post-list li { margin-left: -14px; padding-left: 12px; }
 }

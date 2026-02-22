@@ -2,7 +2,9 @@
   <div class="wrapper">
     <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
     <nav class="site-nav" aria-label="Main navigation">
-      <a class="page-link" href="{{ "/feed.xml" | relative_url }}">RSS</a>
+      {%- for link in site.minima.social_links -%}
+        <a class="page-link" href="{{ link.user_url }}" target="_blank" rel="noopener">{{ link.platform }}</a>
+      {%- endfor -%}
     </nav>
   </div>
 </header>
