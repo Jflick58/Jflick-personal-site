@@ -1,0 +1,15 @@
+title: Justin Flick
+description: >-
+  Musings on Data Science/Engineering, Software Development, and Corporate Management.
+author: Justin Flick
+baseurl: ""
+url: "https://justinflick.com"
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+google_analytics: G-WVPX2KDWCZ
+minima:
+  social_links:
+    - platform: github
+      user_url: "https://github.com/Jflick58"
