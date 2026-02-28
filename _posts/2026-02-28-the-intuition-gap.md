@@ -2,6 +2,7 @@
 layout: post
 title: "The Intuition Gap: AI-Assisted Coding and the Challenge of Growing Junior Engineers"
 date: 2026-02-28
+image: "https://images.pexels.com/photos/21323/pexels-photo.jpg"
 tags: [ai, software development, engineering management, junior developers, musings]
 ---
 
