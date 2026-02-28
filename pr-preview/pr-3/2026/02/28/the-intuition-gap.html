@@ -44,15 +44,15 @@
   <div class="post-content e-content" itemprop="articleBody">
     <h2 id="the-agentic-shift-is-real">The Agentic Shift Is Real</h2>
 
-<p>I’ve been a proponent of Claude Code since it launched. If I’m being honest, I was somewhat skeptical of truly agentic coding early on—not of AI’s potential, but of its practical efficacy as an <em>agent</em> rather than a copilot. Claude Code changed my mind. It convinced me there was genuine merit to the approach, and since Claude Opus 4.5 shipped, I’ve been offloading progressively more of my development work to agents.</p>
+<p>I’ve been a proponent of Claude Code since it launched. If I’m being honest, I was somewhat skeptical of truly agentic coding early on. Not of AI’s potential, but of its practical efficacy as an <em>agent</em> rather than a copilot. Claude Code changed my mind. It convinced me there was genuine merit to the approach, and since Claude Opus 4.5 shipped, I’ve been offloading progressively more of my development work to agents.</p>
 
-<p>What my day looks like now is genuinely different than it did two years ago. As a staff engineer, a substantial portion of my time is spent overseeing and context-switching between multiple Claude agents running in parallel—sometimes across multiple worktrees if we’re working on different areas of the same application, or across entirely different projects. I remember saying to former colleagues back in 2023: <em>“At some point, people’s jobs are going to shift from doing the work themselves to managing a series of agentic runs.”</em> At the time, I was thinking primarily about clerical and specialty roles—claims handling at the insurance company I was working for, for example, where you’d want human oversight but AI could dramatically scale what a single person could supervise. It turns out that reality arrived first in software development, and faster than I expected.</p>
+<p>What my day looks like now is genuinely different than it did two years ago. As a staff engineer, a substantial portion of my time is spent overseeing and context-switching between multiple Claude agents running in parallel, sometimes across multiple worktrees if we’re working on different areas of the same application, or across entirely different projects. I remember saying to former colleagues back in 2023: <em>“At some point, people’s jobs are going to shift from doing the work themselves to managing a series of agentic runs.”</em> At the time, I was thinking primarily about clerical and specialty roles. Claims handling at the insurance company I was working for, for example, where you’d want human oversight but AI could dramatically scale what a single person could supervise. It turns out that reality arrived first in software development, and faster than I expected.</p>
 
 <h2 id="am-i-actually-more-productive">Am I Actually More Productive?</h2>
 
-<p>There’s a popular take floating around that AI only <em>makes you feel</em> more productive without actually delivering the goods. I’m aware of it, and I hold it with appropriate skepticism. That said, I feel extremely confident that my output has materially increased—and I think part of what separates my experience from others is <em>how</em> I use these tools.</p>
+<p>There’s a popular take floating around that AI only <em>makes you feel</em> more productive without actually delivering the goods. I’m aware of it, and I hold it with appropriate skepticism. That said, I feel extremely confident that my output has materially increased, and I think part of what separates my experience from others is <em>how</em> I use these tools.</p>
 
-<p>This is an important aside: I think it is critical for software engineers to maintain an internal context window of what’s happening in a codebase, even if you’re not directly responsible for every single line of code. You have to interact with the agent’s output—reading diffs, consuming the plan, tracking what changed and why—rather than treating it as a black box that just produces PRs. The moment you stop doing that, you lose the ability to catch the subtle problems that only experience can surface.</p>
+<p>This is an important aside: I think it is critical for software engineers to maintain an internal context window of what’s happening in a codebase, even if you’re not directly responsible for every single line of code. You have to interact with the agent’s output (reading diffs, consuming the plan, tracking what changed and why) rather than treating it as a black box that just produces PRs. The moment you stop doing that, you lose the ability to catch the subtle problems that only experience can surface.</p>
 
 <h2 id="what-actually-worries-me">What Actually Worries Me</h2>
 
@@ -64,17 +64,17 @@
 
 <h2 id="the-intuition-problem">The Intuition Problem</h2>
 
-<p>Junior and mid-level engineers—or simply less experienced engineers regardless of title—lack the intuition that makes these tools genuinely powerful in capable hands. As a reasonably seasoned engineer, I can look at an implementation plan Claude produces and spot red flags: an approach that doesn’t account for existing patterns in our codebase, a concurrency issue lurking in a data structure choice, a function boundary that’s going to become a debugging nightmare at 2am. I can see those things quickly because I’ve encountered the consequences before.</p>
+<p>Junior and mid-level engineers (or simply less experienced engineers regardless of title) lack the intuition that makes these tools genuinely powerful in capable hands. As a reasonably seasoned engineer, I can look at an implementation plan Claude produces and spot red flags: an approach that doesn’t account for existing patterns in our codebase, a concurrency issue lurking in a data structure choice, a function boundary that’s going to become a debugging nightmare at 2am. I can see those things quickly because I’ve encountered the consequences before.</p>
 
-<p>Some of that comes from reading—design patterns, architecture books, the collective wisdom of the field. But most of it is <strong>hard-won through direct experience</strong>:</p>
+<p>Some of that comes from reading: design patterns, architecture books, the collective wisdom of the field. But most of it is <strong>hard-won through direct experience</strong>:</p>
 
 <ul>
   <li><strong>I built it, I shipped it, I owned it, it broke.</strong> That feedback loop is irreplaceable. Knowing intellectually that certain mutation patterns can create race conditions is different from having <em>owned a production incident caused by one</em>. The latter sticks in a way that no textbook can replicate.</li>
-  <li><strong>I’ve had to go to the source.</strong> I remember early in my data engineering career trying to scale up pipelines and running into race condition issues I couldn’t explain. I ended up having to read the actual Pandas source code to understand how certain mutation operations on DataFrames worked under the hood—specifically, what couldn’t be safely parallelized. Now I can look at higher-level Pandas code and immediately recognize similar patterns. That recognition exists because of one painful debugging session, not because of anything I read.</li>
+  <li><strong>I’ve had to go to the source.</strong> I remember early in my data engineering career trying to scale up pipelines and running into race condition issues I couldn’t explain. I ended up having to read the actual Pandas source code to understand how certain mutation operations on DataFrames worked under the hood, specifically what couldn’t be safely parallelized. Now I can look at higher-level Pandas code and immediately recognize similar patterns. That recognition exists because of one painful debugging session, not because of anything I read.</li>
   <li><strong>Abstractions hide the lesson.</strong> Every library we use has layers of abstraction that remove context. Sometimes that’s fine. But the engineers who can reason through those abstractions are the ones who’ve had to dig below them.</li>
 </ul>
 
-<p>The problem is that this knowledge is fundamentally <em>experiential</em>. Yes, you can encode some of it in shared libraries, code review culture, and team norms—but there’s always some abstraction in that encoding that dilutes the lesson. You learn to recognize a race condition by having caused one, not by reading about one.</p>
+<p>The problem is that this knowledge is fundamentally <em>experiential</em>. Yes, you can encode some of it in shared libraries, code review culture, and team norms, but there’s always some abstraction in that encoding that dilutes the lesson. You learn to recognize a race condition by having caused one, not by reading about one.</p>
 
 <h2 id="the-broken-feedback-loop">The Broken Feedback Loop</h2>
 
@@ -83,12 +83,12 @@
 <ol>
   <li>Getting assigned to something just slightly beyond your current capability</li>
   <li>Struggling with it</li>
-  <li>Owning the consequences of your approach—the bugs, the on-call pages, the awkward code reviews</li>
+  <li>Owning the consequences of your approach: the bugs, the on-call pages, the awkward code reviews</li>
   <li>Iterating toward something better</li>
   <li>Carrying that pattern-recognition forward into every future decision</li>
 </ol>
 
-<p>Every 10X engineer had to start as a 1X engineer at some point. Unless you’re Linus Torvalds, there was a period where you were functionally a little bit useless, and companies and mentors gave you the space to accumulate that hard-won knowledge. That was part of the deal—for both sides.</p>
+<p>Every 10X engineer had to start as a 1X engineer at some point. Unless you’re Linus Torvalds, there was a period where you were functionally a little bit useless, and companies and mentors gave you the space to accumulate that hard-won knowledge. That was part of the deal, for both sides.</p>
 
 <p>Now, a junior engineer can hand a complex problem to Claude and receive sophisticated, production-looking code they only partially understand. They can ship something that <em>works</em> without going through the struggle that would have built their internal model of <em>why</em> it works, or more critically, <em>when it will break</em>. We’ve replaced the struggle with output, and the struggle was where the learning happened.</p>
 
@@ -103,19 +103,19 @@
   <li><strong>What is a 5X engineer today will become the new 1X baseline</strong> as productivity expectations adjust to what these tools make possible.</li>
 </ul>
 
-<p>That creates a substantially higher barrier to entry into the field. And absent robust support structures—strong post-secondary education, meaningful professional pathways, real mentorship—you end up with a progressively more inaccessible on-ramp for new engineers. That’s a problem worth taking seriously.</p>
+<p>That creates a substantially higher barrier to entry into the field. And absent robust support structures (strong post-secondary education, meaningful professional pathways, real mentorship) you end up with a progressively more inaccessible on-ramp for new engineers. That’s a problem worth taking seriously.</p>
 
 <h2 id="what-do-we-do-about-it">What Do We Do About It?</h2>
 
-<p>I’m genuinely uncertain about the specific answer here. But I’m increasingly convinced that <strong>the primary challenge for senior engineers is no longer pure technical mentorship—it’s teaching intuition and critical thinking.</strong></p>
+<p>I’m genuinely uncertain about the specific answer here. But I’m increasingly convinced that <strong>the primary challenge for senior engineers is no longer pure technical mentorship. It’s teaching intuition and critical thinking.</strong></p>
 
-<p>In the past, mentorship often focused on things like how to operate professionally with Git, code review standards, or systems design fundamentals. Those things still matter, but I think what matters <em>more</em> now is helping junior engineers build their mental models of a codebase, across the stack, across the organization—in ways that make AI tools genuinely amplifying rather than just capable of producing plausible-looking output.</p>
+<p>In the past, mentorship often focused on things like how to operate professionally with Git, code review standards, or systems design fundamentals. Those things still matter, but I think what matters <em>more</em> now is helping junior engineers build their mental models of a codebase, across the stack, across the organization, in ways that make AI tools genuinely amplifying rather than just capable of producing plausible-looking output.</p>
 
-<p>The challenge is that intuition is hard to teach through structured lessons. The field of pedagogy has grappled with this in other disciplines—how do experts transfer intuition to novices?—and I think software development is going to have to engage with that question seriously. Especially because the traditional feedback cycle that used to generate that intuition organically has been substantially modified.</p>
+<p>The challenge is that intuition is hard to teach through structured lessons. The field of pedagogy has grappled with this in other disciplines (how do experts transfer intuition to novices?) and I think software development is going to have to engage with that question seriously. Especially because the traditional feedback cycle that used to generate that intuition organically has been substantially modified.</p>
 
 <h2 id="final-thoughts">Final Thoughts</h2>
 
-<p>I don’t have a crisp solution here, and I’d rather be honest about that than wrap this up with five clean bullet points that imply I do. What I’m confident about is the problem statement: <strong>the more capable AI coding agents become, the more critical it is that the engineers directing them have well-developed intuition</strong>—and we have not yet figured out how to develop that intuition without the apprenticeship model that AI is simultaneously disrupting.</p>
+<p>I don’t have a crisp solution here, and I’d rather be honest about that than wrap this up with five clean bullet points that imply I do. What I’m confident about is the problem statement: <strong>the more capable AI coding agents become, the more critical it is that the engineers directing them have well-developed intuition</strong>, and we have not yet figured out how to develop that intuition without the apprenticeship model that AI is simultaneously disrupting.</p>
 
 <p>That’s the rub. It’s something I intend to keep exploring, and I think it deserves a lot more attention than it’s currently getting in the industry conversation around AI and engineering productivity.</p>
 
