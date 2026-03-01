@@ -14,7 +14,7 @@ What my day looks like now is genuinely different than it did two years ago. As 
 
 ## Am I Actually More Productive?
 
-There's a popular take floating around that AI only *makes you feel* more productive without actually delivering the goods. I'm aware of it, and I hold it with appropriate skepticism. That said, I feel extremely confident that my output has materially increased, and I think part of what separates my experience from others is *how* I use these tools.
+There's a popular take floating around that AI only *makes you feel* more productive without actually delivering the goods. I feel extremely confident my output has materially increased — and maybe that's part of the delusion. Either way, I think part of what separates my experience from others is *how* I use these tools.
 
 This is an important aside: I think it is critical for software engineers to maintain an internal context window of what's happening in a codebase, even if you're not directly responsible for every single line of code. You have to interact with the agent's output (reading diffs, consuming the plan, tracking what changed and why) rather than treating it as a black box that just produces PRs. The moment you stop doing that, you lose the ability to catch the subtle problems that only experience can surface.
 
@@ -23,8 +23,6 @@ This is an important aside: I think it is critical for software engineers to mai
 What makes me nervous is watching colleagues use these tools without that engagement loop. No meaningful use of plan mode. No iterative refinement of the approach before execution. PRs reviewed only at the end rather than monitoring diffs as they develop. And increasingly, I see engineers whose primary evaluation criteria is: *does it work, and can I demo the core feature?*
 
 The tell is in commit messages and PR descriptions. When those are thin or clearly AI-generated without meaningful curation, it signals that there wasn't much translation happening between the agent's output and the engineer's understanding. The engineer shipped something they can demonstrate but don't fully own.
-
-This is where the root problem crystallizes for me.
 
 ## The Intuition Problem
 
@@ -40,13 +38,7 @@ The problem is that this knowledge is fundamentally *experiential*. Yes, you can
 
 ## The Broken Feedback Loop
 
-AI has substantially disrupted the traditional feedback loop that built this intuition in junior developers. Previously, cutting your teeth as an engineer meant:
-
-1. Getting assigned to something just slightly beyond your current capability
-2. Struggling with it
-3. Owning the consequences of your approach: the bugs, the on-call pages, the awkward code reviews
-4. Iterating toward something better
-5. Carrying that pattern-recognition forward into every future decision
+AI has disrupted the traditional feedback loop that built this intuition in junior developers. Previously, cutting your teeth meant getting assigned something just slightly beyond you, struggling through it, owning the bugs, the on-call pages, the awkward code reviews, and carrying the resulting pattern-recognition into every future decision.
 
 Every 10X engineer had to start as a 1X engineer at some point. Unless you're Linus Torvalds, there was a period where you were functionally a little bit useless, and companies and mentors gave you the space to accumulate that hard-won knowledge. That was part of the deal, for both sides.
 
@@ -56,23 +48,20 @@ Now, a junior engineer can hand a complex problem to Claude and receive sophisti
 
 I'm bullish on coding agents continuing to improve. And as they do, companies will respond in one of two ways: maintain the same productivity with fewer people, or increase productivity with the same headcount. In either scenario, remaining valuable as a developer means operating as a 5-10X engineer.
 
-This isn't a prediction that programmers will be fully automated away. But I do think we'll see a structural lean-out of the industry. Here's the shift I expect:
+This isn't a prediction that programmers will be fully automated away. But I do think we'll see a lean-out of the industry. The way I'd put it: what it means to be a 1X engineer today starts to look like the floor of acceptable performance in a few years, and what it means to be a 5X engineer today starts to look like the new 1X baseline as expectations adjust to what these tools make possible.
 
-- **What is a 1X engineer today will become the floor of acceptable performance tomorrow.** The baseline keeps moving.
-- **What is a 5X engineer today will become the new 1X baseline** as productivity expectations adjust to what these tools make possible.
-
-That creates a substantially higher barrier to entry into the field. And absent robust support structures (strong post-secondary education, meaningful professional pathways, real mentorship) you end up with a progressively more inaccessible on-ramp for new engineers. That's a problem worth taking seriously.
+That creates a steeper and steeper on-ramp for people entering the field. Absent the emergence of some additional credentialing like doctors or traditional engineering that more formally demonstrates capability, you end up with a pipeline that's progressively harder to break into. That's a problem worth taking seriously.
 
 ## What Do We Do About It?
 
 I'm genuinely uncertain about the specific answer here. But I'm increasingly convinced that **the primary challenge for senior engineers is no longer pure technical mentorship. It's teaching intuition and critical thinking.**
 
-In the past, mentorship often focused on things like how to operate professionally with Git, code review standards, or systems design fundamentals. Those things still matter, but I think what matters *more* now is helping junior engineers build their mental models of a codebase, across the stack, across the organization, in ways that make AI tools genuinely amplifying rather than just capable of producing plausible-looking output.
+In the past, mentorship often focused on things like how to operate professionally with Git, code review standards, or systems design fundamentals. Those things still matter, but I think what matters *more* now is helping junior engineers build their mental models of a codebase, across the stack, and across the organization, in ways that make AI tools genuinely amplifying rather than just capable of producing plausible-looking output. Obviously that's always been a part of the mentorship of more junior engineers; but our newly agentic world makes that far more critical than its ever been.
 
-The challenge is that intuition is hard to teach through structured lessons. The field of pedagogy has grappled with this in other disciplines (how do experts transfer intuition to novices?) and I think software development is going to have to engage with that question seriously. Especially because the traditional feedback cycle that used to generate that intuition organically has been substantially modified.
+The challenge is that intuition is hard to teach through structured lessons. The field of pedagogy has grappled with this in other disciplines (how do experts transfer intuition to novices?) and I think software development is going to have to engage with that question seriously. Especially because the traditional feedback cycle that used to generate that intuition organically has been pretty thoroughly disrupted.
 
 ## Final Thoughts
 
-I don't have a crisp solution here, and I'd rather be honest about that than wrap this up with five clean bullet points that imply I do. What I'm confident about is the problem statement: **the more capable AI coding agents become, the more critical it is that the engineers directing them have well-developed intuition**, and we have not yet figured out how to develop that intuition without the apprenticeship model that AI is simultaneously disrupting.
+I don't have a crisp solution here, and I'd rather be honest about that than wrap this up with some platitudes that imply I do. What I'm confident about is the problem statement: **the more capable AI coding agents become, the more critical it is that the engineers directing them have well-developed intuition**, and we have not yet figured out how to develop that intuition without the apprenticeship model that AI is simultaneously disrupting.
 
 That's the rub. It's something I intend to keep exploring, and I think it deserves a lot more attention than it's currently getting in the industry conversation around AI and engineering productivity.
