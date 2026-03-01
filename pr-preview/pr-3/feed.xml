@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://justinflick.com/pr-preview/pr-3/feed.xml" rel="self" type="application/atom+xml" /><link href="https://justinflick.com/pr-preview/pr-3/" rel="alternate" type="text/html" /><updated>2026-02-28T08:40:04+00:00</updated><id>https://justinflick.com/pr-preview/pr-3/feed.xml</id><title type="html">Justin Flick</title><subtitle>Musings on Data Science/Engineering, Software Development, and Corporate Management.</subtitle><author><name>Justin Flick</name></author><entry><title type="html">The Intuition Gap: AI-Assisted Coding and the Challenge of Growing Junior Engineers</title><link href="https://justinflick.com/pr-preview/pr-3/2026/02/28/the-intuition-gap.html" rel="alternate" type="text/html" title="The Intuition Gap: AI-Assisted Coding and the Challenge of Growing Junior Engineers" /><published>2026-02-28T00:00:00+00:00</published><updated>2026-02-28T00:00:00+00:00</updated><id>https://justinflick.com/pr-preview/pr-3/2026/02/28/the-intuition-gap</id><content type="html" xml:base="https://justinflick.com/pr-preview/pr-3/2026/02/28/the-intuition-gap.html"><![CDATA[<h2 id="the-agentic-shift-is-real">The Agentic Shift Is Real</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://justinflick.com/pr-preview/pr-3/feed.xml" rel="self" type="application/atom+xml" /><link href="https://justinflick.com/pr-preview/pr-3/" rel="alternate" type="text/html" /><updated>2026-03-01T06:23:37+00:00</updated><id>https://justinflick.com/pr-preview/pr-3/feed.xml</id><title type="html">Justin Flick</title><subtitle>Musings on Data Science/Engineering, Software Development, and Corporate Management.</subtitle><author><name>Justin Flick</name></author><entry><title type="html">The Intuition Gap: AI-Assisted Coding and the Challenge of Growing Junior Engineers</title><link href="https://justinflick.com/pr-preview/pr-3/2026/02/28/the-intuition-gap.html" rel="alternate" type="text/html" title="The Intuition Gap: AI-Assisted Coding and the Challenge of Growing Junior Engineers" /><published>2026-02-28T00:00:00+00:00</published><updated>2026-02-28T00:00:00+00:00</updated><id>https://justinflick.com/pr-preview/pr-3/2026/02/28/the-intuition-gap</id><content type="html" xml:base="https://justinflick.com/pr-preview/pr-3/2026/02/28/the-intuition-gap.html"><![CDATA[<h2 id="the-agentic-shift-is-real">The Agentic Shift Is Real</h2>
 
 <p>I’ve been a proponent of Claude Code since it launched. If I’m being honest, I was somewhat skeptical of truly agentic coding early on. Not of AI’s potential, but of its practical efficacy as an <em>agent</em> rather than a copilot. Claude Code changed my mind. It convinced me there was genuine merit to the approach, and since Claude Opus 4.5 shipped, I’ve been offloading progressively more of my development work to agents.</p>
 
@@ -6,7 +6,7 @@
 
 <h2 id="am-i-actually-more-productive">Am I Actually More Productive?</h2>
 
-<p>There’s a popular take floating around that AI only <em>makes you feel</em> more productive without actually delivering the goods. I’m aware of it, and I hold it with appropriate skepticism. That said, I feel extremely confident that my output has materially increased, and I think part of what separates my experience from others is <em>how</em> I use these tools.</p>
+<p>There’s a popular take floating around that AI only <em>makes you feel</em> more productive without actually delivering the goods. I feel extremely confident my output has materially increased — and maybe that’s part of the delusion. Either way, I think part of what separates my experience from others is <em>how</em> I use these tools.</p>
 
 <p>This is an important aside: I think it is critical for software engineers to maintain an internal context window of what’s happening in a codebase, even if you’re not directly responsible for every single line of code. You have to interact with the agent’s output (reading diffs, consuming the plan, tracking what changed and why) rather than treating it as a black box that just produces PRs. The moment you stop doing that, you lose the ability to catch the subtle problems that only experience can surface.</p>
 
@@ -15,8 +15,6 @@
 <p>What makes me nervous is watching colleagues use these tools without that engagement loop. No meaningful use of plan mode. No iterative refinement of the approach before execution. PRs reviewed only at the end rather than monitoring diffs as they develop. And increasingly, I see engineers whose primary evaluation criteria is: <em>does it work, and can I demo the core feature?</em></p>
 
 <p>The tell is in commit messages and PR descriptions. When those are thin or clearly AI-generated without meaningful curation, it signals that there wasn’t much translation happening between the agent’s output and the engineer’s understanding. The engineer shipped something they can demonstrate but don’t fully own.</p>
-
-<p>This is where the root problem crystallizes for me.</p>
 
 <h2 id="the-intuition-problem">The Intuition Problem</h2>
 
@@ -34,15 +32,7 @@
 
 <h2 id="the-broken-feedback-loop">The Broken Feedback Loop</h2>
 
-<p>AI has substantially disrupted the traditional feedback loop that built this intuition in junior developers. Previously, cutting your teeth as an engineer meant:</p>
-
-<ol>
-  <li>Getting assigned to something just slightly beyond your current capability</li>
-  <li>Struggling with it</li>
-  <li>Owning the consequences of your approach: the bugs, the on-call pages, the awkward code reviews</li>
-  <li>Iterating toward something better</li>
-  <li>Carrying that pattern-recognition forward into every future decision</li>
-</ol>
+<p>AI has disrupted the traditional feedback loop that built this intuition in junior developers. Previously, cutting your teeth meant getting assigned something just slightly beyond you, struggling through it, owning the bugs, the on-call pages, the awkward code reviews, and carrying the resulting pattern-recognition into every future decision.</p>
 
 <p>Every 10X engineer had to start as a 1X engineer at some point. Unless you’re Linus Torvalds, there was a period where you were functionally a little bit useless, and companies and mentors gave you the space to accumulate that hard-won knowledge. That was part of the deal, for both sides.</p>
 
@@ -52,26 +42,21 @@
 
 <p>I’m bullish on coding agents continuing to improve. And as they do, companies will respond in one of two ways: maintain the same productivity with fewer people, or increase productivity with the same headcount. In either scenario, remaining valuable as a developer means operating as a 5-10X engineer.</p>
 
-<p>This isn’t a prediction that programmers will be fully automated away. But I do think we’ll see a structural lean-out of the industry. Here’s the shift I expect:</p>
+<p>This isn’t a prediction that programmers will be fully automated away. But I do think we’ll see a lean-out of the industry. The way I’d put it: what it means to be a 1X engineer today starts to look like the floor of acceptable performance in a few years, and what it means to be a 5X engineer today starts to look like the new 1X baseline as expectations adjust to what these tools make possible.</p>
 
-<ul>
-  <li><strong>What is a 1X engineer today will become the floor of acceptable performance tomorrow.</strong> The baseline keeps moving.</li>
-  <li><strong>What is a 5X engineer today will become the new 1X baseline</strong> as productivity expectations adjust to what these tools make possible.</li>
-</ul>
-
-<p>That creates a substantially higher barrier to entry into the field. And absent robust support structures (strong post-secondary education, meaningful professional pathways, real mentorship) you end up with a progressively more inaccessible on-ramp for new engineers. That’s a problem worth taking seriously.</p>
+<p>That creates a steeper and steeper on-ramp for people entering the field. Absent the emergence of some additional credentialing like doctors or traditional engineering that more formally demonstrates capability, you end up with a pipeline that’s progressively harder to break into. That’s a problem worth taking seriously.</p>
 
 <h2 id="what-do-we-do-about-it">What Do We Do About It?</h2>
 
 <p>I’m genuinely uncertain about the specific answer here. But I’m increasingly convinced that <strong>the primary challenge for senior engineers is no longer pure technical mentorship. It’s teaching intuition and critical thinking.</strong></p>
 
-<p>In the past, mentorship often focused on things like how to operate professionally with Git, code review standards, or systems design fundamentals. Those things still matter, but I think what matters <em>more</em> now is helping junior engineers build their mental models of a codebase, across the stack, across the organization, in ways that make AI tools genuinely amplifying rather than just capable of producing plausible-looking output.</p>
+<p>In the past, mentorship often focused on things like how to operate professionally with Git, code review standards, or systems design fundamentals. Those things still matter, but I think what matters <em>more</em> now is helping junior engineers build their mental models of a codebase, across the stack, and across the organization, in ways that make AI tools genuinely amplifying rather than just capable of producing plausible-looking output. Obviously that’s always been a part of the mentorship of more junior engineers; but our newly agentic world makes that far more critical than its ever been.</p>
 
-<p>The challenge is that intuition is hard to teach through structured lessons. The field of pedagogy has grappled with this in other disciplines (how do experts transfer intuition to novices?) and I think software development is going to have to engage with that question seriously. Especially because the traditional feedback cycle that used to generate that intuition organically has been substantially modified.</p>
+<p>The challenge is that intuition is hard to teach through structured lessons. The field of pedagogy has grappled with this in other disciplines (how do experts transfer intuition to novices?) and I think software development is going to have to engage with that question seriously. Especially because the traditional feedback cycle that used to generate that intuition organically has been pretty thoroughly disrupted.</p>
 
 <h2 id="final-thoughts">Final Thoughts</h2>
 
-<p>I don’t have a crisp solution here, and I’d rather be honest about that than wrap this up with five clean bullet points that imply I do. What I’m confident about is the problem statement: <strong>the more capable AI coding agents become, the more critical it is that the engineers directing them have well-developed intuition</strong>, and we have not yet figured out how to develop that intuition without the apprenticeship model that AI is simultaneously disrupting.</p>
+<p>I don’t have a crisp solution here, and I’d rather be honest about that than wrap this up with some platitudes that imply I do. What I’m confident about is the problem statement: <strong>the more capable AI coding agents become, the more critical it is that the engineers directing them have well-developed intuition</strong>, and we have not yet figured out how to develop that intuition without the apprenticeship model that AI is simultaneously disrupting.</p>
 
 <p>That’s the rub. It’s something I intend to keep exploring, and I think it deserves a lot more attention than it’s currently getting in the industry conversation around AI and engineering productivity.</p>]]></content><author><name>Justin Flick</name></author><category term="ai" /><category term="software development" /><category term="engineering management" /><category term="junior developers" /><category term="musings" /><summary type="html"><![CDATA[The Agentic Shift Is Real]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://images.pexels.com/photos/21323/pexels-photo.jpg" /><media:content medium="image" url="https://images.pexels.com/photos/21323/pexels-photo.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Thoughts on Technical Hiring</title><link href="https://justinflick.com/pr-preview/pr-3/2023/09/11/thoughts-on-technical-hiring.html" rel="alternate" type="text/html" title="Thoughts on Technical Hiring" /><published>2023-09-11T00:00:00+00:00</published><updated>2023-09-11T00:00:00+00:00</updated><id>https://justinflick.com/pr-preview/pr-3/2023/09/11/thoughts-on-technical-hiring</id><content type="html" xml:base="https://justinflick.com/pr-preview/pr-3/2023/09/11/thoughts-on-technical-hiring.html"><![CDATA[<h2 id="philosophical-thoughts">Philosophical Thoughts</h2>
 
