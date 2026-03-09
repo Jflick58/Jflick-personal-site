@@ -99,11 +99,16 @@ def main():
     full_prompt = build_prompt(args.prompt)
 
     g = GemImg()
-    gen = g.generate(
-        full_prompt,
-        aspect_ratio=args.aspect_ratio,
-        save=False,
-    )
+    try:
+        gen = g.generate(
+            full_prompt,
+            aspect_ratio=args.aspect_ratio,
+            save=False,
+        )
+    except Exception as e:
+        print(f"Error: image generation failed — {e}", file=sys.stderr)
+        print("Check that GEMINI_API_KEY is valid and the Gemini API is reachable.", file=sys.stderr)
+        sys.exit(1)
 
     output_path = save_dir / f"{filename}.webp"
     gen.image.save(str(output_path), format="WEBP", quality=85)
