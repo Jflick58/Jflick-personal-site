@@ -7,7 +7,6 @@ dependencies = [
     "httpx",
     "pydantic",
     "typer>=0.15",
-    "gemimg>=0.2",
     "webtypy>=0.1.7",
 ]
 
@@ -18,6 +17,7 @@ genimg = "genimg.cli:app"
 dev = [
     "workers-py",
     "workers-runtime-sdk",
+    "gemimg>=0.2",
 ]
 
 [build-system]
