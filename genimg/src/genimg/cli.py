@@ -9,12 +9,14 @@ import typer
 from .core import generate_image_local
 from .models import ImageRequest
 
-app = typer.Typer(help="Generate blog images matching the site's warm minimalist aesthetic.")
+app = typer.Typer(help="Generate images via Gemini with optional style prompts.")
 
 
 @app.command()
 def generate(
     prompt: Annotated[str, typer.Argument(help=ImageRequest.model_fields["prompt"].description)],
+    style_prompt: Annotated[str, typer.Option(help=ImageRequest.model_fields["style_prompt"].description)] = ImageRequest.model_fields["style_prompt"].default,
+    style_prompt_file: Annotated[Path | None, typer.Option(help="Path to a file containing style instructions (alternative to --style-prompt)")] = None,
     post_slug: Annotated[str | None, typer.Option(help=ImageRequest.model_fields["post_slug"].description)] = ImageRequest.model_fields["post_slug"].default,
     output: Annotated[str | None, typer.Option(help=ImageRequest.model_fields["output"].description)] = ImageRequest.model_fields["output"].default,
     index: Annotated[int, typer.Option(help=ImageRequest.model_fields["index"].description)] = ImageRequest.model_fields["index"].default,
@@ -22,9 +24,14 @@ def generate(
     model: Annotated[str, typer.Option(help=ImageRequest.model_fields["model"].description)] = ImageRequest.model_fields["model"].default,
     save_dir: Annotated[str, typer.Option(help=ImageRequest.model_fields["save_dir"].description)] = ImageRequest.model_fields["save_dir"].default,
 ) -> None:
-    """Generate a blog image locally using gemimg."""
+    """Generate an image locally using gemimg."""
+    resolved_style = style_prompt
+    if style_prompt_file and style_prompt_file.is_file():
+        resolved_style = style_prompt_file.read_text()
+
     req = ImageRequest(
         prompt=prompt,
+        style_prompt=resolved_style,
         post_slug=post_slug,
         output=output,
         index=index,
@@ -39,6 +46,7 @@ def generate(
     try:
         image_bytes = generate_image_local(
             req.prompt,
+            style_prompt=req.style_prompt,
             aspect_ratio=req.aspect_ratio,
             model=req.model,
         )

@@ -4,9 +4,13 @@ from pydantic import BaseModel, Field
 
 
 class ImageRequest(BaseModel):
-    """Parameters for generating a blog image."""
+    """Parameters for generating an image."""
 
     prompt: str = Field(description="Image subject description")
+    style_prompt: str = Field(
+        default="",
+        description="Style instructions prepended to the prompt (e.g. aesthetic, palette, constraints)",
+    )
     post_slug: str | None = Field(
         default=None,
         description="Post slug for auto-naming (e.g. 'the-intuition-gap')",

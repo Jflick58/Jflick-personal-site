@@ -29,6 +29,7 @@ def generate(
     try:
         image_bytes = generate_image(
             req.prompt,
+            style_prompt=req.style_prompt,
             aspect_ratio=req.aspect_ratio,
             model=req.model,
         )

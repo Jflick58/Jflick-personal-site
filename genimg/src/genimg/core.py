@@ -2,11 +2,9 @@
 
 import os
 from io import BytesIO
-from pathlib import Path
 
 import httpx
 
-STYLE_PROMPT = (Path(__file__).resolve().parent / "style-prompt.md").read_text()
 GEMINI_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
 
 
@@ -24,6 +22,7 @@ def _fix_proxy() -> None:
 def generate_image(
     prompt: str,
     *,
+    style_prompt: str = "",
     aspect_ratio: str = "16:9",
     model: str = "gemini-2.0-flash-preview-image-generation",
     gemini_api_key: str | None = None,
@@ -38,7 +37,7 @@ def generate_image(
 
     _fix_proxy()
 
-    full_prompt = STYLE_PROMPT + prompt
+    full_prompt = style_prompt + prompt if style_prompt else prompt
     url = f"{GEMINI_BASE}/{model}:generateContent?key={api_key}"
     body = {
         "contents": [{"parts": [{"text": full_prompt}]}],
@@ -67,6 +66,7 @@ def generate_image(
 def generate_image_local(
     prompt: str,
     *,
+    style_prompt: str = "",
     aspect_ratio: str = "16:9",
     model: str = "gemini-2.0-flash-preview-image-generation",
 ) -> bytes:
@@ -78,8 +78,9 @@ def generate_image_local(
 
     _fix_proxy()
 
+    full_prompt = style_prompt + prompt if style_prompt else prompt
     g = GemImg(model=model)
-    gen = g.generate(STYLE_PROMPT + prompt, aspect_ratio=aspect_ratio, save=False)
+    gen = g.generate(full_prompt, aspect_ratio=aspect_ratio, save=False)
 
     buf = BytesIO()
     gen.image.save(buf, format="WEBP", quality=85)
