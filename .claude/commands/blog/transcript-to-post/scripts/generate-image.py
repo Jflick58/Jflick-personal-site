@@ -85,6 +85,17 @@ def main():
         )
         sys.exit(1)
 
+    # Python's httpx honours wildcard no_proxy entries (e.g. *.googleapis.com),
+    # which bypasses the egress proxy and hits the blocked direct route.
+    # Strip googleapis.com entries so the proxy is used, matching curl's behaviour.
+    for var in ("no_proxy", "NO_PROXY"):
+        if var in os.environ:
+            filtered = ",".join(
+                h for h in os.environ[var].split(",")
+                if "googleapis.com" not in h and "google.com" not in h
+            )
+            os.environ[var] = filtered
+
     save_dir = Path(args.save_dir)
     save_dir.mkdir(parents=True, exist_ok=True)
 
