@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>The Intuition Gap: AI-Assisted Coding and the Challenge of Growing Junior Engineers | Justin Flick</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="The Intuition Gap: AI-Assisted Coding and the Challenge of Growing Junior Engineers" />
+<meta name="author" content="Justin Flick" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The Agentic Shift Is Real" />
+<meta property="og:description" content="The Agentic Shift Is Real" />
+<link rel="canonical" href="https://justinflick.com/pr-preview/pr-4/2026/02/28/the-intuition-gap.html" />
+<meta property="og:url" content="https://justinflick.com/pr-preview/pr-4/2026/02/28/the-intuition-gap.html" />
+<meta property="og:site_name" content="Justin Flick" />
+<meta property="og:image" content="https://images.pexels.com/photos/21323/pexels-photo.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-02-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://images.pexels.com/photos/21323/pexels-photo.jpg" />
+<meta property="twitter:title" content="The Intuition Gap: AI-Assisted Coding and the Challenge of Growing Junior Engineers" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Justin Flick"},"dateModified":"2026-02-28T00:00:00+00:00","datePublished":"2026-02-28T00:00:00+00:00","description":"The Agentic Shift Is Real","headline":"The Intuition Gap: AI-Assisted Coding and the Challenge of Growing Junior Engineers","image":"https://images.pexels.com/photos/21323/pexels-photo.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://justinflick.com/pr-preview/pr-4/2026/02/28/the-intuition-gap.html"},"url":"https://justinflick.com/pr-preview/pr-4/2026/02/28/the-intuition-gap.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/pr-preview/pr-4/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://justinflick.com/pr-preview/pr-4/feed.xml" title="Justin Flick" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/pr-preview/pr-4/">Justin Flick</a>
+    <nav class="site-nav" aria-label="Main navigation"><a class="page-link" href="https://github.com/Jflick58" target="_blank" rel="noopener">github</a><a class="page-link" href="https://www.linkedin.com/in/justin-flick-88416b71/" target="_blank" rel="noopener">linkedin</a></nav>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">The Intuition Gap: AI-Assisted Coding and the Challenge of Growing Junior Engineers</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2026-02-28T00:00:00+00:00" itemprop="datePublished">
+        February 28, 2026
+      </time>
+    </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="the-agentic-shift-is-real">The Agentic Shift Is Real</h2>
+
+<p>I’ve been a proponent of Claude Code since it launched. If I’m being honest, I was somewhat skeptical of truly agentic coding early on. Not of AI’s potential, but of its practical efficacy as an <em>agent</em> rather than a copilot. Claude Code changed my mind. It convinced me there was genuine merit to the approach, and since Claude Opus 4.5 shipped, I’ve been offloading progressively more of my development work to agents.</p>
+
+<p>What my day looks like now is genuinely different than it did two years ago. As a staff engineer, a substantial portion of my time is spent overseeing and context-switching between multiple Claude agents running in parallel, sometimes across multiple worktrees if we’re working on different areas of the same application, or across entirely different projects. I remember saying to former colleagues back in 2023: <em>“At some point, people’s jobs are going to shift from doing the work themselves to managing a series of agentic runs.”</em> At the time, I was thinking primarily about clerical and specialty roles. Claims handling at the insurance company I was working for, for example, where you’d want human oversight but AI could dramatically scale what a single person could supervise. It turns out that reality arrived first in software development, and faster than I expected.</p>
+
+<h2 id="am-i-actually-more-productive">Am I Actually More Productive?</h2>
+
+<p>There’s a popular take floating around that AI only <em>makes you feel</em> more productive without actually delivering the goods. I feel extremely confident my output has materially increased — and maybe that’s part of the delusion. Either way, I think part of what separates my experience from others is <em>how</em> I use these tools.</p>
+
+<p>This is an important aside: I think it is critical for software engineers to maintain an internal context window of what’s happening in a codebase, even if you’re not directly responsible for every single line of code. You have to interact with the agent’s output (reading diffs, consuming the plan, tracking what changed and why) rather than treating it as a black box that just produces PRs. The moment you stop doing that, you lose the ability to catch the subtle problems that only experience can surface.</p>
+
+<h2 id="what-actually-worries-me">What Actually Worries Me</h2>
+
+<p>What makes me nervous is watching colleagues use these tools without that engagement loop. No meaningful use of plan mode. No iterative refinement of the approach before execution. PRs reviewed only at the end rather than monitoring diffs as they develop. And increasingly, I see engineers whose primary evaluation criteria is: <em>does it work, and can I demo the core feature?</em></p>
+
+<p>The tell is in commit messages and PR descriptions. When those are thin or clearly AI-generated without meaningful curation, it signals that there wasn’t much translation happening between the agent’s output and the engineer’s understanding. The engineer shipped something they can demonstrate but don’t fully own.</p>
+
+<h2 id="the-intuition-problem">The Intuition Problem</h2>
+
+<p>Junior and mid-level engineers (or simply less experienced engineers regardless of title) lack the intuition that makes these tools genuinely powerful in capable hands. As a reasonably seasoned engineer, I can look at an implementation plan Claude produces and spot red flags: an approach that doesn’t account for existing patterns in our codebase, a concurrency issue lurking in a data structure choice, a function boundary that’s going to become a debugging nightmare at 2am. I can see those things quickly because I’ve encountered the consequences before.</p>
+
+<p>Some of that comes from reading: design patterns, architecture books, the collective wisdom of the field. But most of it is <strong>hard-won through direct experience</strong>:</p>
+
+<ul>
+  <li><strong>I built it, I shipped it, I owned it, it broke.</strong> That feedback loop is irreplaceable. Knowing intellectually that certain mutation patterns can create race conditions is different from having <em>owned a production incident caused by one</em>. The latter sticks in a way that no textbook can replicate.</li>
+  <li><strong>I’ve had to go to the source.</strong> I remember early in my data engineering career trying to scale up pipelines and running into race condition issues I couldn’t explain. I ended up having to read the actual Pandas source code to understand how certain mutation operations on DataFrames worked under the hood, specifically what couldn’t be safely parallelized. Now I can look at higher-level Pandas code and immediately recognize similar patterns. That recognition exists because of one painful debugging session, not because of anything I read.</li>
+  <li><strong>Abstractions hide the lesson.</strong> Every library we use has layers of abstraction that remove context. Sometimes that’s fine. But the engineers who can reason through those abstractions are the ones who’ve had to dig below them.</li>
+</ul>
+
+<p>The problem is that this knowledge is fundamentally <em>experiential</em>. Yes, you can encode some of it in shared libraries, code review culture, and team norms, but there’s always some abstraction in that encoding that dilutes the lesson. You learn to recognize a race condition by having caused one, not by reading about one.</p>
+
+<h2 id="the-broken-feedback-loop">The Broken Feedback Loop</h2>
+
+<p>AI has disrupted the traditional feedback loop that built this intuition in junior developers. Previously, cutting your teeth meant getting assigned something just slightly beyond you, struggling through it, owning the bugs, the on-call pages, the awkward code reviews, and carrying the resulting pattern-recognition into every future decision.</p>
+
+<p>Every 10X engineer had to start as a 1X engineer at some point. Unless you’re Linus Torvalds, there was a period where you were functionally a little bit useless, and companies and mentors gave you the space to accumulate that hard-won knowledge. That was part of the deal, for both sides.</p>
+
+<p>Now, a junior engineer can hand a complex problem to Claude and receive sophisticated, production-looking code they only partially understand. They can ship something that <em>works</em> without going through the struggle that would have built their internal model of <em>why</em> it works, or more critically, <em>when it will break</em>. We’ve replaced the struggle with output, and the struggle was where the learning happened.</p>
+
+<h2 id="the-5-10x-shift-and-what-it-means">The 5-10X Shift and What It Means</h2>
+
+<p>I’m bullish on coding agents continuing to improve. And as they do, companies will respond in one of two ways: maintain the same productivity with fewer people, or increase productivity with the same headcount. In either scenario, remaining valuable as a developer means operating as a 5-10X engineer.</p>
+
+<p>This isn’t a prediction that programmers will be fully automated away. But I do think we’ll see a lean-out of the industry. The way I’d put it: what it means to be a 1X engineer today starts to look like the floor of acceptable performance in a few years, and what it means to be a 5X engineer today starts to look like the new 1X baseline as expectations adjust to what these tools make possible.</p>
+
+<p>That creates a steeper and steeper on-ramp for people entering the field. Absent the emergence of some additional credentialing like doctors or traditional engineering that more formally demonstrates capability, you end up with a pipeline that’s progressively harder to break into. That’s a problem worth taking seriously.</p>
+
+<h2 id="what-do-we-do-about-it">What Do We Do About It?</h2>
+
+<p>I’m genuinely uncertain about the specific answer here. But I’m increasingly convinced that <strong>the primary challenge for senior engineers is no longer pure technical mentorship. It’s teaching intuition and critical thinking.</strong></p>
+
+<p>In the past, mentorship often focused on things like how to operate professionally with Git, code review standards, or systems design fundamentals. Those things still matter, but I think what matters <em>more</em> now is helping junior engineers build their mental models of a codebase, across the stack, and across the organization, in ways that make AI tools genuinely amplifying rather than just capable of producing plausible-looking output. Obviously that’s always been a part of the mentorship of more junior engineers; but our newly agentic world makes that far more critical than its ever been.</p>
+
+<p>The challenge is that intuition is hard to teach through structured lessons. The field of pedagogy has grappled with this in other disciplines (how do experts transfer intuition to novices?) and I think software development is going to have to engage with that question seriously. Especially because the traditional feedback cycle that used to generate that intuition organically has been pretty thoroughly disrupted.</p>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>I don’t have a crisp solution here, and I’d rather be honest about that than wrap this up with some platitudes that imply I do. What I’m confident about is the problem statement: <strong>the more capable AI coding agents become, the more critical it is that the engineers directing them have well-developed intuition</strong>, and we have not yet figured out how to develop that intuition without the apprenticeship model that AI is simultaneously disrupting.</p>
+
+<p>That’s the rub. It’s something I intend to keep exploring, and I think it deserves a lot more attention than it’s currently getting in the industry conversation around AI and engineering productivity.</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <a class="back-link" href="/pr-preview/pr-4/">← All posts</a>
+  </footer>
+</article>
+
+      </div>
+    </main><footer class="site-footer">
+  <div class="wrapper">
+    <div class="footer-inner">
+      <span>Justin Flick</span>
+      <a href="/pr-preview/pr-4/feed.xml">RSS</a>
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>
