@@ -30,6 +30,12 @@ jobs:
           npm ci
           uv sync
 
+      - name: Set Worker secrets
+        run: |
+          echo '{"API_KEY":"${{ secrets.GENIMG_API_KEY }}","GEMINI_API_KEY":"${{ secrets.GEMINI_API_KEY }}"}' | npx wrangler secret:bulk
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
       - name: Deploy to Cloudflare Workers
         run: uv run pywrangler deploy
         env:
