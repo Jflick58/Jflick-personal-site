@@ -1,24 +1,15 @@
 #!/usr/bin/env -S uv run
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["gemimg"]
+# dependencies = ["gemimg", "fire"]
 # ///
-"""Generate blog images matching the site's warm minimalist aesthetic.
+"""Generate blog images matching the site's warm minimalist aesthetic."""
 
-Uses the gemimg library to generate images via Gemini's image model.
-Expects GEMINI_API_KEY environment variable to be set.
-
-Usage:
-    uv run .claude/commands/blog/transcript-to-post/scripts/generate-image.py \
-        "A brass compass on warm white marble" \
-        --post-slug the-intuition-gap --aspect-ratio 3:2 --index 1
-"""
-
-import argparse
 import os
 import sys
 from pathlib import Path
 
+import fire
 from gemimg import GemImg
 
 STYLE_PREFIX = """## Style Requirements
@@ -47,91 +38,64 @@ Aspects of the image composition that MUST be followed EXACTLY:
 """
 
 
-def build_prompt(user_prompt: str) -> str:
-    return STYLE_PREFIX + user_prompt
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Generate blog images with the site's warm minimalist aesthetic."
-    )
-    parser.add_argument("prompt", help="Image subject description")
-    parser.add_argument(
-        "-o", "--output", help="Output filename (without extension)", default=None
-    )
-    parser.add_argument(
-        "--post-slug",
-        help="Post slug for auto-naming (e.g., 'the-intuition-gap')",
-        default=None,
-    )
-    parser.add_argument(
-        "--aspect-ratio",
-        help="Aspect ratio (default: 16:9)",
-        default="16:9",
-    )
-    parser.add_argument(
-        "--save-dir",
-        help="Output directory (default: assets/images/generated/)",
-        default="assets/images/generated",
-    )
-    parser.add_argument(
-        "--index",
-        help="Image index number for naming (default: 1)",
-        type=int,
-        default=1,
-    )
-
-    args = parser.parse_args()
-
-    if not os.environ.get("GEMINI_API_KEY"):
-        print(
-            "Error: GEMINI_API_KEY environment variable is not set",
-            file=sys.stderr,
-        )
-        sys.exit(1)
-
-    # Python's httpx honours wildcard no_proxy entries (e.g. *.googleapis.com),
-    # which bypasses the egress proxy and hits the blocked direct route.
-    # Strip googleapis.com entries so the proxy is used, matching curl's behaviour.
+def _fix_proxy():
+    """Strip googleapis.com from no_proxy so the egress proxy is used."""
     for var in ("no_proxy", "NO_PROXY"):
         if var in os.environ:
-            filtered = ",".join(
+            os.environ[var] = ",".join(
                 h for h in os.environ[var].split(",")
                 if "googleapis.com" not in h and "google.com" not in h
             )
-            os.environ[var] = filtered
 
-    save_dir = Path(args.save_dir)
-    save_dir.mkdir(parents=True, exist_ok=True)
 
-    # Determine output filename
-    if args.output:
-        filename = args.output
-    elif args.post_slug:
-        filename = f"{args.post_slug}-{args.index}"
-    else:
-        filename = f"generated-{args.index}"
+def generate(
+    prompt: str,
+    *,
+    post_slug: str | None = None,
+    output: str | None = None,
+    index: int = 1,
+    aspect_ratio: str = "16:9",
+    model: str = "gemini-3-pro-image-preview",
+    save_dir: str = "assets/images/generated",
+):
+    """Generate a blog image.
 
-    full_prompt = build_prompt(args.prompt)
-
-    g = GemImg()
-    try:
-        gen = g.generate(
-            full_prompt,
-            aspect_ratio=args.aspect_ratio,
-            save=False,
-        )
-    except Exception as e:
-        print(f"Error: image generation failed — {e}", file=sys.stderr)
-        print("Check that GEMINI_API_KEY is valid and the Gemini API is reachable.", file=sys.stderr)
+    Args:
+        prompt: Image subject description.
+        post_slug: Post slug for auto-naming (e.g. 'the-intuition-gap').
+        output: Output filename without extension. Overrides post_slug naming.
+        index: Image index number for naming.
+        aspect_ratio: Aspect ratio (default 16:9).
+        model: Gemini model to use.
+        save_dir: Output directory.
+    """
+    if not os.environ.get("GEMINI_API_KEY"):
+        print("Error: GEMINI_API_KEY environment variable is not set", file=sys.stderr)
         sys.exit(1)
 
-    output_path = save_dir / f"{filename}.webp"
-    gen.image.save(str(output_path), format="WEBP", quality=85)
+    _fix_proxy()
 
-    # Print relative path for easy Markdown embedding
-    print(f"/{output_path}")
+    dest = Path(save_dir)
+    dest.mkdir(parents=True, exist_ok=True)
+
+    if output:
+        filename = output
+    elif post_slug:
+        filename = f"{post_slug}-{index}"
+    else:
+        filename = f"generated-{index}"
+
+    g = GemImg(model=model)
+    try:
+        gen = g.generate(STYLE_PREFIX + prompt, aspect_ratio=aspect_ratio, save=False)
+    except Exception as e:
+        print(f"Error: image generation failed — {e}", file=sys.stderr)
+        sys.exit(1)
+
+    out = dest / f"{filename}.webp"
+    gen.image.save(str(out), format="WEBP", quality=85)
+    print(f"/{out}")
 
 
 if __name__ == "__main__":
-    main()
+    fire.Fire(generate)
