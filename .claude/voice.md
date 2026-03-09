@@ -95,13 +95,13 @@ Not every post needs all six sections. But the opening must establish stakes, an
 layout: post
 title: "Post Title"
 date: YYYY-MM-DD
-image: https://images.pexels.com/photos/[id]/pexels-photo-[id].jpeg
+image: /assets/images/generated/{slug}-header.webp
 tags: [tag1, tag2]
 ---
 ```
 
 - `tags` include `musings` for opinion/reflective posts
-- `image` is a Pexels URL — search for something thematically relevant, not literally illustrative
+- `image` is a generated image path — created via the image generation script with a thematically evocative (not literal) prompt
 
 **Headers**
 - H2 only (`##`) — no H3 subheadings
