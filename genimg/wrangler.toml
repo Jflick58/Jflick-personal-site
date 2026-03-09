@@ -1,7 +1,0 @@
-name = "genimg"
-main = "src/index.js"
-compatibility_date = "2025-01-01"
-
-# Secrets (set via `wrangler secret put`):
-#   GEMINI_API_KEY  – Google Gemini API key
-#   API_KEY         – static bearer token for authenticating callers
