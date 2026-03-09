@@ -57,7 +57,7 @@ Write the Jekyll blog post following voice.md:
 
 After completing the draft, generate images to accompany the post. Use the script at `.claude/commands/blog/transcript-to-post/scripts/generate-image.py`.
 
-**Prerequisites:** Ensure `gemimg` is installed (`pip install -r requirements.txt`) and `GEMINI_API_KEY` is set in the environment.
+**Prerequisites:** Ensure `uv` is installed and `GEMINI_API_KEY` is set in the environment. The script manages its own dependencies via PEP 723 inline metadata — no separate install step needed.
 
 **How many images:**
 - **Every post** gets a header image (for the frontmatter `image` field and social cards)
@@ -78,7 +78,7 @@ After completing the draft, generate images to accompany the post. Use the scrip
 **To generate each image, run:**
 
 ```bash
-python .claude/commands/blog/transcript-to-post/scripts/generate-image.py \
+uv run .claude/commands/blog/transcript-to-post/scripts/generate-image.py \
   "Your descriptive prompt here" \
   --post-slug "{slug}" \
   --aspect-ratio "3:2" \
@@ -90,7 +90,7 @@ Where `{slug}` is the post's filename slug (e.g., `the-intuition-gap`) and `{n}`
 **For the header image:**
 
 ```bash
-python .claude/commands/blog/transcript-to-post/scripts/generate-image.py \
+uv run .claude/commands/blog/transcript-to-post/scripts/generate-image.py \
   "Your descriptive prompt here" \
   --post-slug "{slug}" \
   --aspect-ratio "16:9" \

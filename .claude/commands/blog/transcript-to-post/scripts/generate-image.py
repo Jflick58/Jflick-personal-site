@@ -1,11 +1,16 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["gemimg"]
+# ///
 """Generate blog images matching the site's warm minimalist aesthetic.
 
 Uses the gemimg library to generate images via Gemini's image model.
 Expects GEMINI_API_KEY environment variable to be set.
 
 Usage:
-    python scripts/generate-image.py "A brass compass on warm white marble" \
+    uv run .claude/commands/blog/transcript-to-post/scripts/generate-image.py \
+        "A brass compass on warm white marble" \
         --post-slug the-intuition-gap --aspect-ratio 3:2 --index 1
 """
 
