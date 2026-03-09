@@ -17,7 +17,6 @@ genimg = "genimg.cli:app"
 dev = [
     "workers-py",
     "workers-runtime-sdk",
-    "gemimg>=0.2",
 ]
 
 [build-system]

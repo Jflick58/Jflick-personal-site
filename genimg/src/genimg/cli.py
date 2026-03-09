@@ -6,7 +6,7 @@ from typing import Annotated
 
 import typer
 
-from .core import generate_image_local
+from .core import generate_image
 from .models import ImageRequest
 
 app = typer.Typer(help="Generate images via Gemini with optional style prompts.")
@@ -24,7 +24,7 @@ def generate(
     model: Annotated[str, typer.Option(help=ImageRequest.model_fields["model"].description)] = ImageRequest.model_fields["model"].default,
     save_dir: Annotated[str, typer.Option(help=ImageRequest.model_fields["save_dir"].description)] = ImageRequest.model_fields["save_dir"].default,
 ) -> None:
-    """Generate an image locally using gemimg."""
+    """Generate an image via the Gemini API."""
     resolved_style = style_prompt
     if style_prompt_file and style_prompt_file.is_file():
         resolved_style = style_prompt_file.read_text()
@@ -44,7 +44,7 @@ def generate(
     dest.mkdir(parents=True, exist_ok=True)
 
     try:
-        image_bytes = generate_image_local(
+        image_bytes = generate_image(
             req.prompt,
             style_prompt=req.style_prompt,
             aspect_ratio=req.aspect_ratio,
