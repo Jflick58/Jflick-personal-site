@@ -1,7 +1,6 @@
 """Core image generation logic shared by CLI and API."""
 
 import os
-from io import BytesIO
 
 import httpx
 
@@ -61,27 +60,3 @@ def generate_image(
                 return base64.b64decode(inline["data"])
 
     raise RuntimeError("No image returned by Gemini")
-
-
-def generate_image_local(
-    prompt: str,
-    *,
-    style_prompt: str = "",
-    aspect_ratio: str = "16:9",
-    model: str = "gemini-2.0-flash-preview-image-generation",
-) -> bytes:
-    """Generate using the gemimg library locally. Returns WebP bytes."""
-    from gemimg import GemImg
-
-    if not os.environ.get("GEMINI_API_KEY"):
-        raise RuntimeError("GEMINI_API_KEY is not set")
-
-    _fix_proxy()
-
-    full_prompt = style_prompt + prompt if style_prompt else prompt
-    g = GemImg(model=model)
-    gen = g.generate(full_prompt, aspect_ratio=aspect_ratio, save=False)
-
-    buf = BytesIO()
-    gen.image.save(buf, format="WEBP", quality=85)
-    return buf.getvalue()
