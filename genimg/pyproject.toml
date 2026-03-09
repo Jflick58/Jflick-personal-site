@@ -1,18 +1,24 @@
 [project]
 name = "genimg"
 version = "0.1.0"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
-    "fastapi>=0.115",
-    "httpx>=0.27",
-    "pydantic>=2",
+    "fastapi",
+    "httpx",
+    "pydantic",
     "typer>=0.15",
-    "uvicorn>=0.34",
     "gemimg>=0.2",
+    "webtypy>=0.1.7",
 ]
 
 [project.scripts]
 genimg = "genimg.cli:app"
+
+[dependency-groups]
+dev = [
+    "workers-py",
+    "workers-runtime-sdk",
+]
 
 [build-system]
 requires = ["hatchling"]

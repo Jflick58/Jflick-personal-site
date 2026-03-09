@@ -2,7 +2,7 @@
 
 import os
 
-from fastapi import Depends, FastAPI, HTTPException, Response
+from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from .core import generate_image
@@ -12,26 +12,38 @@ app = FastAPI(title="genimg")
 security = HTTPBearer()
 
 
+def _get_env(request: Request) -> dict:
+    """Get environment — CF Worker env from scope, or os.environ fallback."""
+    return getattr(request.scope.get("env"), "__dict__", None) or dict(os.environ)
+
+
 def _verify_token(
+    request: Request,
     credentials: HTTPAuthorizationCredentials = Depends(security),
-) -> None:
-    expected = os.environ.get("API_KEY", "")
+) -> Request:
+    env = _get_env(request)
+    expected = env.get("API_KEY", "")
     if not expected or credentials.credentials != expected:
         raise HTTPException(status_code=401, detail="Unauthorized")
+    return request
 
 
 @app.post("/generate")
 def generate(
     req: ImageRequest,
-    _: None = Depends(_verify_token),
+    request: Request = Depends(_verify_token),
 ) -> Response:
-    """Generate a blog image and return raw WebP bytes."""
+    """Generate an image and return raw WebP bytes."""
+    env = _get_env(request)
+    gemini_key = env.get("GEMINI_API_KEY", "")
+
     try:
         image_bytes = generate_image(
             req.prompt,
             style_prompt=req.style_prompt,
             aspect_ratio=req.aspect_ratio,
             model=req.model,
+            gemini_api_key=gemini_key,
         )
     except RuntimeError as e:
         raise HTTPException(status_code=502, detail=str(e))
