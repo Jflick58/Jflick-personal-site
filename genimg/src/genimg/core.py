@@ -23,7 +23,7 @@ async def generate_image(
     *,
     style_prompt: str = "",
     aspect_ratio: str = "16:9",
-    model: str = "gemini-3.1-pro-preview",
+    model: str = "gemini-3-pro-image-preview",
     gemini_api_key: str | None = None,
 ) -> bytes:
     """Call the Gemini API and return WebP image bytes.

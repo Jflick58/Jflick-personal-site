@@ -22,7 +22,7 @@ class ImageRequest(BaseModel):
     index: int = Field(default=1, description="Image index number for naming")
     aspect_ratio: str = Field(default="16:9", description="Aspect ratio")
     model: str = Field(
-        default="gemini-3.1-pro-preview",
+        default="gemini-3-pro-image-preview",
         description="Gemini model to use",
     )
     save_dir: str = Field(
