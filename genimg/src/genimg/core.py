@@ -42,7 +42,6 @@ async def generate_image(
         "contents": [{"parts": [{"text": full_prompt}]}],
         "generationConfig": {
             "responseModalities": ["IMAGE", "TEXT"],
-            "imageMimeType": "image/webp",
         },
     }
 
