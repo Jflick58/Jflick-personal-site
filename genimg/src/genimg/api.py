@@ -17,7 +17,7 @@ def _get_env(request: Request) -> dict:
     return getattr(request.scope.get("env"), "__dict__", None) or dict(os.environ)
 
 
-def _verify_token(
+async def _verify_token(
     request: Request,
     credentials: HTTPAuthorizationCredentials = Depends(security),
 ) -> Request:
