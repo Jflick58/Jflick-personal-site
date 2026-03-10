@@ -12,9 +12,22 @@ app = FastAPI(title="genimg")
 security = HTTPBearer()
 
 
-def _get_env(request: Request) -> dict:
+class _Env:
+    """Wraps CF Worker env (attribute access) or os.environ (dict access)."""
+
+    def __init__(self, obj):
+        self._obj = obj
+
+    def get(self, key: str, default: str = "") -> str:
+        if self._obj is not None:
+            val = getattr(self._obj, key, None)
+            return val if val is not None else default
+        return os.environ.get(key, default)
+
+
+def _get_env(request: Request) -> _Env:
     """Get environment — CF Worker env from scope, or os.environ fallback."""
-    return getattr(request.scope.get("env"), "__dict__", None) or dict(os.environ)
+    return _Env(request.scope.get("env"))
 
 
 async def _verify_token(
