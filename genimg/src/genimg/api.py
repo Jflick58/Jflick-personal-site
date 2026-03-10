@@ -51,7 +51,7 @@ async def generate(
     gemini_key = env.get("GEMINI_API_KEY", "")
 
     try:
-        image_bytes = await generate_image(
+        image_bytes, mime_type = await generate_image(
             req.prompt,
             style_prompt=req.style_prompt,
             aspect_ratio=req.aspect_ratio,
@@ -61,4 +61,4 @@ async def generate(
     except RuntimeError as e:
         raise HTTPException(status_code=502, detail=str(e))
 
-    return Response(content=image_bytes, media_type="image/webp")
+    return Response(content=image_bytes, media_type=mime_type)

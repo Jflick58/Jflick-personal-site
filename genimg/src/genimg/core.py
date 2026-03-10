@@ -25,8 +25,8 @@ async def generate_image(
     aspect_ratio: str = "16:9",
     model: str = "gemini-3-pro-image-preview",
     gemini_api_key: str | None = None,
-) -> bytes:
-    """Call the Gemini API and return WebP image bytes.
+) -> tuple[bytes, str]:
+    """Call the Gemini API and return (image_bytes, mime_type).
 
     Used by both the local CLI and the FastAPI server.
     """
@@ -42,6 +42,7 @@ async def generate_image(
         "contents": [{"parts": [{"text": full_prompt}]}],
         "generationConfig": {
             "responseModalities": ["IMAGE", "TEXT"],
+            "imageMimeType": "image/png",
         },
     }
 
@@ -54,9 +55,10 @@ async def generate_image(
     for candidate in data.get("candidates", []):
         for part in candidate.get("content", {}).get("parts", []):
             inline = part.get("inlineData", {})
-            if inline.get("mimeType", "").startswith("image/"):
+            mime_type = inline.get("mimeType", "")
+            if mime_type.startswith("image/"):
                 import base64
 
-                return base64.b64decode(inline["data"])
+                return base64.b64decode(inline["data"]), mime_type
 
     raise RuntimeError("No image returned by Gemini")
