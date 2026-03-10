@@ -1,5 +1,6 @@
 """Typer CLI for local blog image generation."""
 
+import asyncio
 import sys
 from pathlib import Path
 from typing import Annotated
@@ -44,12 +45,12 @@ def generate(
     dest.mkdir(parents=True, exist_ok=True)
 
     try:
-        image_bytes = generate_image(
+        image_bytes = asyncio.run(generate_image(
             req.prompt,
             style_prompt=req.style_prompt,
             aspect_ratio=req.aspect_ratio,
             model=req.model,
-        )
+        ))
     except RuntimeError as e:
         typer.echo(f"Error: {e}", err=True)
         raise typer.Exit(1)

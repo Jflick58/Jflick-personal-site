@@ -18,7 +18,7 @@ def _fix_proxy() -> None:
             )
 
 
-def generate_image(
+async def generate_image(
     prompt: str,
     *,
     style_prompt: str = "",
@@ -46,7 +46,8 @@ def generate_image(
         },
     }
 
-    resp = httpx.post(url, json=body, timeout=120)
+    async with httpx.AsyncClient(timeout=120) as client:
+        resp = await client.post(url, json=body)
     if resp.status_code != 200:
         raise RuntimeError(f"Gemini API error ({resp.status_code}): {resp.text}")
 

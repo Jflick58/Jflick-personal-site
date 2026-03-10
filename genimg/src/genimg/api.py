@@ -29,7 +29,7 @@ def _verify_token(
 
 
 @app.post("/generate")
-def generate(
+async def generate(
     req: ImageRequest,
     request: Request = Depends(_verify_token),
 ) -> Response:
@@ -38,7 +38,7 @@ def generate(
     gemini_key = env.get("GEMINI_API_KEY", "")
 
     try:
-        image_bytes = generate_image(
+        image_bytes = await generate_image(
             req.prompt,
             style_prompt=req.style_prompt,
             aspect_ratio=req.aspect_ratio,
