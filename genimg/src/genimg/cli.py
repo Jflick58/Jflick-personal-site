@@ -45,7 +45,7 @@ def generate(
     dest.mkdir(parents=True, exist_ok=True)
 
     try:
-        image_bytes = asyncio.run(generate_image(
+        image_bytes, mime_type = asyncio.run(generate_image(
             req.prompt,
             style_prompt=req.style_prompt,
             aspect_ratio=req.aspect_ratio,
@@ -55,6 +55,7 @@ def generate(
         typer.echo(f"Error: {e}", err=True)
         raise typer.Exit(1)
 
-    out = dest / f"{req.filename}.webp"
+    ext = mime_type.split("/")[-1]
+    out = dest / f"{req.filename}.{ext}"
     out.write_bytes(image_bytes)
     typer.echo(f"/{out}")
