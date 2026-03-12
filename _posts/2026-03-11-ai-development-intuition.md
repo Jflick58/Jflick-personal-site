@@ -36,7 +36,7 @@ I compare that to my experience at non-tech companies and startups. Those organi
 
 Your scaffolding is the limiter. Not the model.
 
-![Diagram: your harness determines your AI ceiling](/assets/images/generated/ai-development-intuition-1.jpeg)
+![Diagram: your harness determines your AI ceiling]({{ '/assets/images/generated/ai-development-intuition-1.jpeg' | relative_url }})
 
 ## The Workflow
 
@@ -66,7 +66,7 @@ I caught it because I knew the design patterns in that codebase. We iterated on 
 
 This is why you need to stay in the loop. An LLM can produce code that passes every test you throw at it and still be the wrong solution from a software engineering standpoint.
 
-![Diagram: local vs global optimization](/assets/images/generated/ai-development-intuition-2.jpeg)
+![Diagram: local vs global optimization]({{ '/assets/images/generated/ai-development-intuition-2.jpeg' | relative_url }})
 
 ## Debugging: Correlation Is Not Causation
 
@@ -110,7 +110,7 @@ To use a Python analogy: early on, your brain is like an `asyncio.Semaphore(2)`.
 
 I think this is also why I've come around on stacked PRs in general. They force you to think about changes atomically. That structure doesn't just help with code review. It helps with the whole flow of managing parallel agent work.
 
-![Diagram: the plan-execute-review loop](/assets/images/generated/ai-development-intuition-3.jpeg)
+![Diagram: context switching between agents]({{ '/assets/images/generated/ai-development-intuition-3.jpeg' | relative_url }})
 
 ## The Reinforcement Loop
 
