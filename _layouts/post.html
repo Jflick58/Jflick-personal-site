@@ -12,6 +12,10 @@ layout: default
     </p>
   </header>
 
+  {% if page.image %}
+  <img class="post-header-image" src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}">
+  {% endif %}
+
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>
