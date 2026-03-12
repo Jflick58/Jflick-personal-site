@@ -105,18 +105,18 @@ Prompts should be specific, evocative, and describe a concrete scene. The script
 - "Oak building blocks arranged in a careful tower, one block slightly askew. Warm studio lighting, shallow depth of field. Represents fragile systems."
 - "Scattered handwritten index cards on a warm white desk, connected by thin brass wire. Overhead view. Represents mapping ideas."
 
-**Embed in the post body** using standard Markdown:
+**Embed in the post body** using Jekyll's `relative_url` filter — NOT a plain absolute path. This ensures images work in both production and PR preview deployments:
 
 ```markdown
-![Alt text describing the image](/assets/images/generated/{slug}-{n}.webp)
+![Alt text describing the image]({{ '/assets/images/generated/{slug}-{n}.jpeg' | relative_url }})
 ```
 
 Place images after the H2 heading of the section they relate to, with a blank line above and below.
 
-**Update the frontmatter** with the header image path:
+**Update the frontmatter** with the header image path (plain path is fine here — the layout applies `relative_url` itself):
 
 ```yaml
-image: /assets/images/generated/{slug}-header.webp
+image: /assets/images/generated/{slug}-header.jpeg
 ```
 
 ## Step 6: Present with editorial notes

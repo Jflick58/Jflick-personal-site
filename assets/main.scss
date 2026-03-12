@@ -251,6 +251,17 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 // ============================================================
+// Post Header Image
+// ============================================================
+
+.post-header-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 56px;
+  border-radius: 2px;
+}
+
+// ============================================================
 // Post Content
 // ============================================================
 
@@ -265,7 +276,7 @@ img { max-width: 100%; height: auto; display: block; }
     font-weight: 400;
     line-height: 1.2;
     color: $text;
-    margin-top: 3.5em;
+    margin-top: 1.5em;
     margin-bottom: 0.8em;
   }
 
