@@ -51,7 +51,8 @@ Write the Jekyll blog post following voice.md:
 - "crystallizes", "delve", "nuanced", "multifaceted"
 - Section headers that announce exactly what follows ("This is where X crystallizes for me")
 - Clean parallel bullet structures that resolve genuine ambiguity too neatly
-- Double em dash parentheticals: `x — a, b, c — y`. Use commas or restructure instead.
+
+**No em dashes.** Do not use em dashes (—) anywhere in the post body. Em dashes are one of the most reliable signals of AI-generated writing. Every em dash can be replaced with something better: two sentences, a comma, parentheses, or a restructured sentence. There is no exception to this rule.
 
 ## Step 5: Generate inline images
 
