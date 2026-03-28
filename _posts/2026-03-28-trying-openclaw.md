@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Trying OpenClaw Without Losing Your Mind (or Your Accounts)"
+title: "OpenClaw: Setup Experience and Initial Thoughts"
 date: 2026-03-28
 image: /assets/images/generated/trying-openclaw-header.jpeg
 tags: [ai, openclaw, security, infrastructure, musings]
