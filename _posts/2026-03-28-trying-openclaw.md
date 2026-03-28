@@ -48,7 +48,7 @@ Discord apparently works similarly; I haven't tested it. Either way, I'd say: sk
 
 A few weeks in, the most telling moment wasn't any individual task. It was getting an unprompted Slack message mid-afternoon about a venture I've been evaluating. I have a cron-based 8pm briefing set up, but this came completely outside that window. The agent had associated an email that came in with a research thread we'd had a few days earlier and flagged it with a draft response suggestion. Then in the same message, it noted there'd been no activity on a GitHub PR I'd opened in the OpenClaw Defender repo and asked if I wanted to follow up.
 
-That's the thing that shifted my read on this. OpenClaw isn't a new model capability. The models have been this capable for a while. It's what happens when you actually let them act. Felix Reissenberger said something in a recent interview along these lines — that the models right now are smarter than most of what people are asking them to do. I think he's right, and I think that's exactly why removing the harness produced such a step-function in what's possible.
+That's the thing that shifted my read on this. OpenClaw isn't a new model capability. The models have been this capable for a while. It's what happens when you actually let them act. [Felix Rieseberg said something in a recent interview](https://youtu.be/ZpZ7lFoWaT8) along these lines — that the models right now are smarter than most of what people are asking them to do. I think he's right, and I think that's exactly why removing the harness produced such a step-function in what's possible.
 
 There's also a recruiter who apparently discovered this. I received a very personalized email from something called "Agent Mel." I won't pretend I wasn't a little impressed.
 
