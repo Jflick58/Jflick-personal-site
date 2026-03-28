@@ -87,6 +87,13 @@ Not every post needs all six sections. But the opening must establish stakes, an
 
 ---
 
+## What to Avoid
+
+- **No em dashes (—).** This is a hard rule. Em dashes are one of the clearest signals of AI-generated writing. Rewrite the sentence instead: split it in two, use a comma, use parentheses, or restructure. No exceptions.
+- **No AI filler words:** "meaningful" as a vague modifier, "fundamentally"/"substantially" as intensifiers, "robust", "navigate"/"landscape" used figuratively, "crystallizes", "delve", "nuanced", "multifaceted"
+
+---
+
 ## Formatting
 
 **Frontmatter**
