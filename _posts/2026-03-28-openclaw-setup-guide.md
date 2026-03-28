@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Running OpenClaw on a VPS: A Secure Self-Hosted Setup Guide"
+title: "My OpenClaw Setup Guide"
 date: 2026-03-28
 image: /assets/images/generated/openclaw-setup-guide-header.jpeg
 tags: [ai, infrastructure, self-hosted, security, openclaw]
