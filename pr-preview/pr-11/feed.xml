@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://justinflick.com/pr-preview/pr-11/feed.xml" rel="self" type="application/atom+xml" /><link href="https://justinflick.com/pr-preview/pr-11/" rel="alternate" type="text/html" /><updated>2026-03-28T20:29:37+00:00</updated><id>https://justinflick.com/pr-preview/pr-11/feed.xml</id><title type="html">Justin Flick</title><subtitle>Musings on Data Science/Engineering, Software Development, and Corporate Management.</subtitle><author><name>Justin Flick</name></author><entry><title type="html">My OpenClaw Setup Guide</title><link href="https://justinflick.com/pr-preview/pr-11/2026/03/28/openclaw-setup-guide.html" rel="alternate" type="text/html" title="My OpenClaw Setup Guide" /><published>2026-03-28T00:00:00+00:00</published><updated>2026-03-28T00:00:00+00:00</updated><id>https://justinflick.com/pr-preview/pr-11/2026/03/28/openclaw-setup-guide</id><content type="html" xml:base="https://justinflick.com/pr-preview/pr-11/2026/03/28/openclaw-setup-guide.html"><![CDATA[<p><em>This is a living document. OpenClaw is under active development, and parts of this guide will become outdated. I’ll keep it updated as the setup evolves — check the git history for what’s changed.</em></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://justinflick.com/pr-preview/pr-11/feed.xml" rel="self" type="application/atom+xml" /><link href="https://justinflick.com/pr-preview/pr-11/" rel="alternate" type="text/html" /><updated>2026-03-28T20:44:14+00:00</updated><id>https://justinflick.com/pr-preview/pr-11/feed.xml</id><title type="html">Justin Flick</title><subtitle>Musings on Data Science/Engineering, Software Development, and Corporate Management.</subtitle><author><name>Justin Flick</name></author><entry><title type="html">My OpenClaw Setup Guide</title><link href="https://justinflick.com/pr-preview/pr-11/2026/03/28/openclaw-setup-guide.html" rel="alternate" type="text/html" title="My OpenClaw Setup Guide" /><published>2026-03-28T00:00:00+00:00</published><updated>2026-03-28T00:00:00+00:00</updated><id>https://justinflick.com/pr-preview/pr-11/2026/03/28/openclaw-setup-guide</id><content type="html" xml:base="https://justinflick.com/pr-preview/pr-11/2026/03/28/openclaw-setup-guide.html"><![CDATA[<p><em>This is a living document. OpenClaw is under active development, and parts of this guide will become outdated. I’ll keep it updated as the setup evolves.</em></p>
 
 <hr />
 
-<p>I’ve been running <a href="https://openclaw.ai">OpenClaw</a> as a self-hosted personal AI assistant for a few months. The default setup is straightforward, but getting it production-hardened — isolated network, secrets managed properly, browser sandboxed, prompt injection guarded — took considerably more work than the docs suggest. This guide is the consolidated version of what I’ve learned.</p>
+<p>I’ve been running <a href="https://openclaw.ai">OpenClaw</a> as a self-hosted personal AI assistant for a few weeks now. The default setup is straightforward, but getting it production-hardened, e.g. isolated network, secrets managed properly, browser sandboxed, prompt injection guarded — took considerably more work than the docs suggest. This guide is the consolidated version of what I’ve learned.</p>
 
-<p>The goal here isn’t “quickest path to running OpenClaw.” It’s a setup you can actually trust: one where a compromised prompt can’t exfiltrate your API keys, where your personal accounts stay untouched by bot activity, and where secrets aren’t sitting in plaintext on disk.</p>
+<p>The goal here isn’t “quickest path to running OpenClaw.” It’s a setup you can trust slightly more than the default: one where a compromised prompt can’t exfiltrate your API keys, where your personal accounts stay untouched by bot activity, and where secrets aren’t sitting in plaintext on disk.</p>
 
 <p>I’d suggest reading through the whole thing before starting. The sections build on each other in ways that aren’t always obvious, and a few ordering decisions — particularly around Tailscale, the <code class="language-plaintext highlighter-rouge">openclaw</code> system user, and the proxy setup — matter a lot.</p>
 
@@ -308,7 +308,7 @@ npm <span class="nb">install</span> <span class="nt">-g</span> openclaw@latest
 openclaw onboard <span class="nt">--install-daemon</span>
 </code></pre></div></div>
 
-<p>The wizard walks you through choosing a provider, a messaging channel, and basic skills. Paste API keys directly to get things running — we’ll switch to 1Password-injected secrets next.</p>
+<p>The wizard walks you through choosing a provider, a messaging channel, and basic skills. Paste API keys directly to get things running — we’ll switch to 1Password-injected secrets next. I personally use OpenAI as my provider via Oauth to reuse my ChatGPT subscription.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openclaw status
 openclaw doctor  <span class="c"># Surfaces risky or misconfigured settings</span>
@@ -346,7 +346,7 @@ op run <span class="nt">--env-file</span><span class="o">=</span>~/.openclaw/.en
   </span><span class="nl">"agents"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"defaults"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai/gpt-5-mini"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai/gpt-5-4"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"fallbacks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"google/gemini-3-flash-preview"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"anthropic/claude-sonnet-4-5"</span><span class="w">
@@ -869,6 +869,8 @@ journalctl <span class="nt">--user</span> <span class="nt">-u</span> openclaw-ga
 
 <h3 id="slack">Slack</h3>
 
+<p><strong>Note</strong> I highly recommend Slack as your primary channel. The thread:session setup is very nice for keeping context isolated and running tasks in parallel.</p>
+
 <ol>
   <li>Go to api.slack.com/apps → “Create New App” → “From scratch.”</li>
   <li>Enable Socket Mode: Settings → Socket Mode → Toggle ON. Create an App Token with <code class="language-plaintext highlighter-rouge">connections:write</code> scope.</li>
@@ -941,7 +943,96 @@ jq <span class="nt">-r</span> <span class="s1">'select(.message.usage.cost.total
 
 <hr />
 
-<h2 id="17-quick-reference">17. Quick Reference</h2>
+<h2 id="17-claude-code-delegation-via-acpx">17. Claude Code Delegation via ACPX</h2>
+
+<p>One of the more powerful things OpenClaw can do is delegate coding tasks to Claude Code as a subagent. Rather than OpenClaw trying to run code itself, it hands off structured coding prompts to Claude Code and waits for results — using <a href="https://github.com/openclaw/acpx">ACPX</a>, a headless CLI client for the Agent Client Protocol (ACP).</p>
+
+<p>The practical upside: you can authenticate Claude Code with your Claude.ai subscription (no separate API key needed for the coding agent), and OpenClaw can queue, run, and inspect Claude Code sessions programmatically.</p>
+
+<h3 id="install-claude-code-on-the-server">Install Claude Code on the server</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># As the openclaw user</span>
+npm <span class="nb">install</span> <span class="nt">-g</span> @anthropic-ai/claude-code@latest
+
+<span class="c"># Authenticate with your Claude.ai subscription</span>
+claude login
+<span class="c"># Follow the browser auth flow via SSH tunnel if needed (same approach as gogcli in Section 7)</span>
+</code></pre></div></div>
+
+<p>Claude Code’s auth token is stored in <code class="language-plaintext highlighter-rouge">~/.claude/</code>. It survives server restarts and does not require a running browser session.</p>
+
+<h3 id="install-acpx">Install ACPX</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-g</span> acpx@latest
+
+<span class="c"># Verify</span>
+acpx <span class="nt">--version</span>
+
+<span class="c"># Initialize global config</span>
+acpx config init
+</code></pre></div></div>
+
+<p>Session state lives in <code class="language-plaintext highlighter-rouge">~/.acpx/</code>. No additional daemon is required.</p>
+
+<h3 id="install-the-acpx-skill-into-openclaw">Install the ACPX skill into OpenClaw</h3>
+
+<p>This gives OpenClaw the SKILL.md reference it needs to know how to invoke ACPX correctly:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx acpx@latest <span class="nt">--skill</span> <span class="nb">install </span>acpx
+</code></pre></div></div>
+
+<h3 id="configure-acpx-to-use-the-local-openclaw-gateway">Configure ACPX to use the local OpenClaw gateway</h3>
+
+<p>Add to <code class="language-plaintext highlighter-rouge">~/.acpx/config.json</code> to point the <code class="language-plaintext highlighter-rouge">openclaw</code> agent at your local gateway instance:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"defaultAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"claude"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"defaultPermissions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approve-all"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"agents"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"openclaw"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"env OPENCLAW_HIDE_BANNER=1 node scripts/run-node.mjs acp --url ws://127.0.0.1:18789 --token-file ~/.openclaw/gateway.token --session agent:main:main"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="test-the-delegation">Test the delegation</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Ask Claude Code a coding task via ACPX</span>
+acpx claude <span class="s2">"explain the structure of this repo"</span>
+
+<span class="c"># Named parallel sessions — useful for running multiple tasks concurrently</span>
+acpx claude <span class="nt">-s</span> backend <span class="s2">"implement token pagination"</span>
+acpx claude <span class="nt">-s</span> frontend <span class="s2">"update the API docs"</span>
+
+<span class="c"># Queue a prompt without waiting for the result</span>
+acpx claude <span class="s2">"run the test suite and fix any failures"</span> <span class="nt">--no-wait</span>
+
+<span class="c"># Check session status</span>
+acpx status
+
+<span class="c"># View recent session history</span>
+acpx sessions <span class="nb">history</span> <span class="nt">--limit</span> 10
+</code></pre></div></div>
+
+<h3 id="how-it-fits-into-the-security-model">How it fits into the security model</h3>
+
+<p>Claude Code runs as the <code class="language-plaintext highlighter-rouge">openclaw</code> user and inherits the Squid proxy egress restrictions from Section 11. Its outbound traffic — npm installs, GitHub API calls, documentation fetches — routes through the allowlist. If Claude Code needs to reach a domain that isn’t listed, add it to <code class="language-plaintext highlighter-rouge">/etc/squid/allowed_domains.txt</code> and reload Squid.</p>
+
+<p>Claude Code does not have access to the browser container or its CDP port directly — that’s still mediated by the OpenClaw gateway.</p>
+
+<h3 id="egress-additions-for-claude-code">Egress additions for Claude Code</h3>
+
+<p>Add these to your Squid allowlist if Claude Code needs them:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">".npmjs.com"</span> | <span class="nb">sudo tee</span> <span class="nt">-a</span> /etc/squid/allowed_domains.txt
+<span class="nb">echo</span> <span class="s2">".registry.npmjs.org"</span> | <span class="nb">sudo tee</span> <span class="nt">-a</span> /etc/squid/allowed_domains.txt
+<span class="nb">sudo </span>systemctl reload squid
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="18-quick-reference">18. Quick Reference</h2>
 
 <h3 id="key-file-locations">Key file locations</h3>
 
@@ -1030,7 +1121,7 @@ Your Desktop (SSH/TUI)       ─┤─── Tailscale Mesh VPN ──── VPS
                               │      1Password, GitHub              (sandboxed)
 </code></pre></div></div>
 
-<p>The gateway is the trust boundary. It holds the secrets, and its network access is locked down. The browser is the open channel to the web, and it has nothing worth stealing.</p>]]></content><author><name>Justin Flick</name></author><category term="ai" /><category term="infrastructure" /><category term="self-hosted" /><category term="security" /><category term="openclaw" /><summary type="html"><![CDATA[This is a living document. OpenClaw is under active development, and parts of this guide will become outdated. I’ll keep it updated as the setup evolves — check the git history for what’s changed.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://justinflick.com/pr-preview/pr-11/assets/images/generated/openclaw-setup-guide-header.jpeg" /><media:content medium="image" url="https://justinflick.com/pr-preview/pr-11/assets/images/generated/openclaw-setup-guide-header.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Building AI Development Intuition: Lessons from Managing Agents and Debugging with LLMs</title><link href="https://justinflick.com/pr-preview/pr-11/2026/03/11/ai-development-intuition.html" rel="alternate" type="text/html" title="Building AI Development Intuition: Lessons from Managing Agents and Debugging with LLMs" /><published>2026-03-11T00:00:00+00:00</published><updated>2026-03-11T00:00:00+00:00</updated><id>https://justinflick.com/pr-preview/pr-11/2026/03/11/ai-development-intuition</id><content type="html" xml:base="https://justinflick.com/pr-preview/pr-11/2026/03/11/ai-development-intuition.html"><![CDATA[<h2 id="master-your-tools-before-you-chase-new-ones">Master Your Tools Before You Chase New Ones</h2>
+<p>The gateway is the trust boundary. It holds the secrets, and its network access is locked down. The browser is the open channel to the web, and it has nothing worth stealing.</p>]]></content><author><name>Justin Flick</name></author><category term="ai" /><category term="infrastructure" /><category term="self-hosted" /><category term="security" /><category term="openclaw" /><summary type="html"><![CDATA[This is a living document. OpenClaw is under active development, and parts of this guide will become outdated. I’ll keep it updated as the setup evolves.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://justinflick.com/pr-preview/pr-11/assets/images/generated/openclaw-setup-guide-header.jpeg" /><media:content medium="image" url="https://justinflick.com/pr-preview/pr-11/assets/images/generated/openclaw-setup-guide-header.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Building AI Development Intuition: Lessons from Managing Agents and Debugging with LLMs</title><link href="https://justinflick.com/pr-preview/pr-11/2026/03/11/ai-development-intuition.html" rel="alternate" type="text/html" title="Building AI Development Intuition: Lessons from Managing Agents and Debugging with LLMs" /><published>2026-03-11T00:00:00+00:00</published><updated>2026-03-11T00:00:00+00:00</updated><id>https://justinflick.com/pr-preview/pr-11/2026/03/11/ai-development-intuition</id><content type="html" xml:base="https://justinflick.com/pr-preview/pr-11/2026/03/11/ai-development-intuition.html"><![CDATA[<h2 id="master-your-tools-before-you-chase-new-ones">Master Your Tools Before You Chase New Ones</h2>
 
 <p>As I mentioned in my last post, I’ve been thinking about how to teach junior developers the intuition that makes me productive with AI tooling. Same disclaimer: I understand there are studies suggesting developers only <em>think</em> they’re more productive. Based on what I’ve been able to measure, I do feel that my output has materially increased. Your mileage may vary.</p>
 
