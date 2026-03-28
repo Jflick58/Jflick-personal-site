@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>OpenClaw: Setup Experience and Initial Thoughts | Justin Flick</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="OpenClaw: Setup Experience and Initial Thoughts" />
+<meta name="author" content="Justin Flick" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I Was Skeptical, and Then I Wasn’t" />
+<meta property="og:description" content="I Was Skeptical, and Then I Wasn’t" />
+<link rel="canonical" href="https://justinflick.com/2026/03/28/trying-openclaw.html" />
+<meta property="og:url" content="https://justinflick.com/2026/03/28/trying-openclaw.html" />
+<meta property="og:site_name" content="Justin Flick" />
+<meta property="og:image" content="https://justinflick.com/assets/images/generated/trying-openclaw-header.jpeg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-03-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://justinflick.com/assets/images/generated/trying-openclaw-header.jpeg" />
+<meta property="twitter:title" content="OpenClaw: Setup Experience and Initial Thoughts" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Justin Flick"},"dateModified":"2026-03-28T00:00:00+00:00","datePublished":"2026-03-28T00:00:00+00:00","description":"I Was Skeptical, and Then I Wasn’t","headline":"OpenClaw: Setup Experience and Initial Thoughts","image":"https://justinflick.com/assets/images/generated/trying-openclaw-header.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"https://justinflick.com/2026/03/28/trying-openclaw.html"},"url":"https://justinflick.com/2026/03/28/trying-openclaw.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://justinflick.com/feed.xml" title="Justin Flick" /></head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">Justin Flick</a>
+    <nav class="site-nav" aria-label="Main navigation"><a class="page-link" href="https://github.com/Jflick58" target="_blank" rel="noopener">github</a><a class="page-link" href="https://www.linkedin.com/in/justin-flick-88416b71/" target="_blank" rel="noopener">linkedin</a></nav>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">OpenClaw: Setup Experience and Initial Thoughts</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2026-03-28T00:00:00+00:00" itemprop="datePublished">
+        March 28, 2026
+      </time>
+    </p>
+  </header>
+
+  
+  <img class="post-header-image" src="/assets/images/generated/trying-openclaw-header.jpeg" alt="OpenClaw: Setup Experience and Initial Thoughts">
+  
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="i-was-skeptical-and-then-i-wasnt">I Was Skeptical, and Then I Wasn’t</h2>
+
+<p>I’ll admit I deliberately stepped back from the OpenClaw hype when it first hit. Not because I doubted the underlying capability (I’d seen enough demos to know there was something there), but because the default setup I kept seeing looked, to be direct, insane. People logging into their personal accounts on Mac minis, giving an AI agent unfettered access to their email, their files, their calendar. I’m impressed with what some of them pulled off. I was also watching and thinking: I would never do that.</p>
+
+<p>What actually got me to reconsider was <a href="https://podcasts.apple.com/us/podcast/how-i-ai/id1809663079?i=1000747009405">an episode of the <em>How I AI</em> podcast</a> from a few weeks back. Claire Vo described her OpenClaw setup, and the key detail was that she’d given the agent its own Google account. Its own email, its own calendar. She shared her calendar <em>with</em> the agent so it could see her availability, but the agent wasn’t creating events as her. It was acting like an executive assistant, creating things from its own account and sharing them. That distinction matters. You don’t give a new EA your login credentials. You give them their own identity and a clearly scoped set of things they can see and touch.</p>
+
+<p>That became the starting point.</p>
+
+<h2 id="the-mental-model-that-made-this-work">The Mental Model That Made This Work</h2>
+
+<p>The executive assistant framing isn’t just a nice analogy. It’s the actual architecture. Once I committed to it, most downstream decisions became obvious.</p>
+
+<p>I set up a separate Google account for the agent with selective calendar sharing, configured 1Password CLI with a read-only vault containing only the credentials I want the agent to have access to, and created a dedicated <code class="language-plaintext highlighter-rouge">openclaw</code> system user on the VPS, isolated from my admin account with no sudo. The agent isn’t me. It has its own identity and a defined perimeter.</p>
+
+<p>For model backends: OpenAI’s API with my ChatGPT subscription handles the core agentic loop. Anthropic doesn’t allow their Claude subscription for OpenClaw’s primary driver, so that’s off the table there. But Claude Code <em>does</em> run as a subagent (that’s approved usage), which means I can spin off Opus and Sonnet for coding tasks without burning my API token budget. Gemini fills in as a fallback and for image generation. In practice, most heavy token operations hit subscriptions rather than pay-per-token, which keeps the runaway cost exposure low.</p>
+
+<p>For prompt injection, I’m running multiple layers. <a href="https://github.com/openclaw-defender/openclaw-defender">OpenClaw Defender</a> is a repo I almost skipped because it only has six stars, which made me nervous enough that I read through the code before installing it. The approach is solid: fast deterministic checks against known injection patterns, then a DeBERTa-based classifier trained specifically to detect prompt injection. It has high recall, but it’s not perfect. <a href="https://github.com/secureclaw/secureclaw">SecureClaw</a> complements it by injecting behavioral instructions into the agent’s memory files, including guidance around emoji-based injection patterns that Microsoft researchers found could bypass DeBERTa. I chose not to add a third LLM in the loop for secondary classification. The latency trade-off didn’t feel worth it for a personal setup, and I had a concern about implicit authority creep, where something that’s already cleared multiple layers ends up treated as more trusted than it should be.</p>
+
+<p>The final layer is a Squid proxy wrapping all outbound traffic from the OpenClaw process, with an explicit domain allowlist. The browser runs in an isolated Docker container and can make arbitrary requests outside the proxy. Yes, I’ve thought about what that means. The proxy containment is for the main process. The browser isolation is about blast radius: if the agent hits a malicious site and something executes, it lands in the container, not on the host. Container escapes are real, but I’m not trying to solve every possible scenario. I’m trying to add boundaries that matter in the likely cases.</p>
+
+<p>Yes, I realize that publishing a detailed blog post about my security setup somewhat undermines the concept of security through obscurity. But I haven’t found a concise, all-in-one guide for this that isn’t behind a Medium paywall, and I think the value of people being able to set this up responsibly outweighs whatever marginal advantage obscurity would have given me.</p>
+
+<h2 id="the-setup-journey-honestly">The Setup Journey, Honestly</h2>
+
+<p><img src="/assets/images/generated/trying-openclaw-1.jpeg" alt="A blown electrical fuse resting on an oak workbench beside a small screwdriver, warm side lighting." /></p>
+
+<p>The original plan was to run this on an old desktop I had sitting under a table in a spare room. It used to be a hackintosh. I got it running, loved it, and then at some point macOS updates got too painful to chase and I replaced it with a real Mac and just… left the desktop under the table. For years. It had 32 gigs of RAM and a discrete GPU, which felt like exactly the kind of machine you’d want for this. So I dusted it off, made a USB installer, had the whole plan ready.</p>
+
+<p>Then I opened the case. I figured I’d at least check on things before powering it on for the first time in years. I noticed one of the RGB LED strip connectors had come loose, which seemed easy enough to fix. I went to plug it back in and immediately got a short. It took out the cooler LEDs, the RGB controller, and as I found out over the next hour of increasingly frantic troubleshooting, the PSU. The paperclip test confirmed it. The machine that was going to become my capable, cost-free OpenClaw host was now just an expensive desk ornament with a dead power supply.</p>
+
+<p>So: lesson one of my OpenClaw setup journey is don’t short your PSU while trying to fix something that was already working fine.</p>
+
+<p>So I went with a Hetzner CPX31: 4 vCPU, 8 GB RAM, roughly $12/month with automated backups. That ended up being a better outcome. The SSH latency from the US is noticeable (the server’s in Germany), but agent response times are completely acceptable. The latency that matters is model inference, and that happens at Anthropic/OpenAI/Google’s infrastructure regardless of where your VPS is.</p>
+
+<p>Getting everything wired up took more trial and error than I expected. The browser container required an iptables entry to remap a port before Chrome’s DevTools Protocol would reliably connect. There was a stretch where I was convinced Anthropic was blocking me. I kept getting 400 errors whenever I tried to authenticate Claude Code from the <code class="language-plaintext highlighter-rouge">openclaw</code> user account. Eventually I figured out the Squid proxy didn’t have the Anthropic domains on the allowlist. Every error was a proxy rejection, not Anthropic doing anything. That diagnosis took longer than it should have, and by the time I got there I’d burned roughly $50 in Opus tokens having it help me troubleshoot. I’ve documented the correct allowlist entries in <a href="/2026/03/28/openclaw-setup-guide.html">the setup guide</a> specifically so no one makes that particular mistake.</p>
+
+<p>The other significant pivot was moving from Telegram to Slack. Telegram is what every getting-started guide recommends, and the initial setup is easier. But I hit serious problems trying to get topic-based threading to work reliably with the allowlist configuration. I wanted multiple parallel sessions for different contexts: code in one thread, email and calendar in another, research in another. Telegram’s topic model was fighting me the whole way. Slack handles this natively. Each thread is its own session. I have a coding channel, an executive assistant channel, an email and calendar channel, and threads within each channel maintain separate contexts. The agent also reacts with a custom emoji when it receives a message, which gives me an immediate acknowledgment that the invocation went through even if the actual response takes a minute.</p>
+
+<p>Discord apparently works similarly; I haven’t tested it. Either way: skip Telegram entirely, even though all the tutorials start there.</p>
+
+<h2 id="what-its-actually-doing">What It’s Actually Doing</h2>
+
+<p><img src="/assets/images/generated/trying-openclaw-2.jpeg" alt="A printed calendar page on a white desk with a few items circled in brass ink, an open notebook beside it." /></p>
+
+<p>Something worth understanding about OpenClaw is that it won’t just spontaneously become proactive on its own. The memory system is powerful, but getting it to actually use that memory to reach out to you without being asked takes deliberate effort. I spent a good amount of time iterating on the SOUL.md and memory files, specifically trying to give it explicit permission and instruction to act proactively: check in on things we’ve discussed, surface emails that connect to prior conversations, flag when something needs a follow-up. The heartbeat runs sub-hourly, which keeps the agent’s context reasonably fresh. I also have a separate cron that fires at 8pm and gives me a briefing on the next day. Both are useful. But I wanted it to go further than that.</p>
+
+<p>The moment I knew it had clicked was getting an unprompted Slack message mid-afternoon about a venture I’ve been evaluating. Nothing triggered it. No cron, no explicit ask. The agent had pulled in an email that came in that day, associated it with a research thread we’d had a few days earlier, and sent me a message with a draft response suggestion that was actually good. In the same message it flagged that a GitHub PR I’d opened in the OpenClaw Defender repo had been sitting without activity and asked if I wanted to follow up on it.</p>
+
+<p>That caught me off guard. The content was substantive, the connections it made were correct, and it came completely out of nowhere from my perspective. That kind of thing happens regularly now. I’ll be in the middle of something and get a Slack message that’s the agent surfacing something I would have forgotten about or not gotten to. It’s not always right about what’s worth flagging, and coaching it toward better signal-to-noise is still an ongoing process, but the behavior is there and it’s useful.</p>
+
+<p>That’s the thing that shifted my read on this. OpenClaw isn’t a new model capability. The models have been this capable for a while. <a href="https://youtu.be/ZpZ7lFoWaT8">Felix Rieseberg said something along these lines in a recent interview</a>: that the models right now are smarter than most of what people are asking them to do. I’d been thinking about this with a coworker recently and that observation really landed. It explains a lot of why OpenClaw got so much attention so fast. It wasn’t any evolution in what the models could do. It was just taking the training wheels off and going no brakes on the agentic loop to see what actually happened. And what happens, it turns out, is that you can do some impressive things. You can also do some very destructive and questionable things (shout out to the recruiter who sent me a very personalized recruiting email from <a href="https://www.agentmail.to/">AgentMail</a>), but the potential is obvious. The model was always there. The harness is what changed. I’d argue this is a specific instance of what I wrote in <a href="/2026/03/11/ai-development-intuition.html">my last post</a>: your scaffolding is the limiter, not the model. OpenClaw is just more evidence of that principle applied outside of code.</p>
+
+<p>That framing reorients what the setup work is actually for. It’s not about making the model more capable. It’s about giving a capable model enough room to act while being thoughtful about what it has access to.</p>
+
+<h2 id="the-part-i-dont-have-figured-out">The Part I Don’t Have Figured Out</h2>
+
+<p>The capability I’m most interested in next is voice. There are things I never get to because of the friction of a phone call, e.g. chasing down a quote or following up with a vendor that’s only reachable during East Coast business hours (I work West Coast hours). I know that sounds like the worst first-world problem imaginable, but I think it gets at something honest about where these tools can actually remove friction from your life rather than just feeling impressive.</p>
+
+<p>What I don’t have a clean answer for is consent. I’ve drawn a clear line that the agent should never represent itself as me. It signs emails as “Assistant to Justin Flick” and I’ve been explicit in its instructions that it should be transparent about being an AI. That feels right to me and I’m not willing to budge on it. But I also think there’s a harder version of the question I haven’t resolved. If someone receives an email from my AI assistant, they can decide whether they want to engage with that. They have information. A phone call is different. Someone picking up the phone didn’t sign up to interact with an AI agent, and some people genuinely don’t want that. I think that’s a reasonable position to hold and I want to be respectful of it. I just don’t have a clean policy yet for how to handle it in practice.</p>
+
+<p>I’m raising this because I think it’s worth sitting with, not as a reason to avoid the tools. Part of why I wanted to write about this at all is that I haven’t found a lot of honest discussion about these questions that isn’t either behind a Medium paywall or buried in a Discord. As someone building agentic products professionally, I also think of this as research. Understanding what the bleeding edge of what these agents can actually do, and what the real friction points are, is directly useful for thinking about how you’d build something more scaled and more responsible.</p>
+
+<h2 id="where-ive-landed-for-now">Where I’ve Landed (For Now)</h2>
+
+<p>I’ve surprised myself with how much I’ve come to appreciate OpenClaw over the past few weeks, especially after starting from a pretty skeptical position. The proactive email moment alone was enough to make me want to keep building this out.</p>
+
+<p>I’m still forming my final read on it. The setup work is non-trivial, the security questions are ongoing, and the ethical questions around consent don’t have clean answers yet. I don’t think any of those are reasons not to use it. They’re just the actual shape of the problem, and I’d rather engage with them directly than pretend the whole thing is frictionless.</p>
+
+<p>If you’re considering this: start with the executive assistant framing, give it its own accounts, lock down the system surface, and skip Telegram. The <a href="/2026/03/28/openclaw-setup-guide.html">setup guide</a> has the rest.</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <a class="back-link" href="/">← All posts</a>
+  </footer>
+</article>
+
+      </div>
+    </main><footer class="site-footer">
+  <div class="wrapper">
+    <div class="footer-inner">
+      <span>Justin Flick</span>
+      <a href="/feed.xml">RSS</a>
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>
