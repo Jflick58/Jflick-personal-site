@@ -1062,24 +1062,4 @@ The full picture once everything is wired up:
 
 ![Overall system architecture — user devices connect via Tailscale to the VPS, where the Gateway and sandboxed Browser container run with separate network paths]({{ '/assets/images/generated/openclaw-setup-guide-architecture.jpeg' | relative_url }})
 
-```
-Your Phone (Telegram/Slack) ─┐
-Your Laptop (WebChat)        ─┤
-Your Desktop (SSH/TUI)       ─┤─── Tailscale Mesh VPN ──── VPS (Hetzner/DO)
-                              │                              │
-                              │                   ┌──────────┴──────────┐
-                              │                   │                     │
-                              │             ┌─────┴──────┐    ┌────────┴────────┐
-                              │             │  OpenClaw   │    │ Sandbox Browser │
-                              │             │  Gateway    │CDP │ (Docker)        │
-                              │             │  :18789     ├───►│ Chromium :9222  │
-                              │             └──────┬──────┘    └────────┬────────┘
-                              │                    │                    │
-                              │              Squid Proxy          Open Internet
-                              │             (allowlist only)      (no secrets)
-                              │                    │                    │
-                              │      AI APIs, Telegram, Slack,     Any website
-                              │      1Password, GitHub              (sandboxed)
-```
-
 The gateway is the trust boundary. It holds the secrets, and its network access is locked down. The browser is the open channel to the web, and it has nothing worth stealing.
