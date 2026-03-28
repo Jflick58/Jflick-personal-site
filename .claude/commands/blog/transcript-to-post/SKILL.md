@@ -43,6 +43,8 @@ Write the Jekyll blog post following voice.md:
 
 **Do not over-polish.** The goal is voice fidelity to the 2023 hiring post and "The Intuition Gap" (2026-02-28) — not a generic clean essay. If a sentence is a little rough but sounds like the author, keep it rough.
 
+**Use complete, grammatically correct sentences.** The author's voice is conversational but not fragmentary. Do not drop subjects or conjunctions to simulate casual speech. "I went to plug it in" not "Went to plug it in." "It has high recall, but it's not perfect" not "High recall, not perfect." Fragments are not a voice marker — they are errors.
+
 **Avoid AI-isms.** The following words and phrases signal AI authorship and must not appear in the draft:
 - "meaningful" as a vague modifier ("meaningful curation", "meaningful mentorship", "meaningful portion")
 - "fundamentally" or "substantially" used as filler intensifiers
