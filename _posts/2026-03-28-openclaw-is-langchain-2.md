@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "OpenClaw is LangChain 2.0"
-date: 2026-03-28
+date: 2026-03-28 18:00:00 -0700
 image: /assets/images/generated/openclaw-is-langchain-2-header.jpeg
 tags: [ai, openclaw, langchain, musings]
 ---
