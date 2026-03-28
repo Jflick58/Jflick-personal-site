@@ -6,13 +6,13 @@ image: /assets/images/generated/openclaw-setup-guide-header.jpeg
 tags: [ai, infrastructure, self-hosted, security, openclaw]
 ---
 
-*This is a living document. OpenClaw is under active development, and parts of this guide will become outdated. I'll keep it updated as the setup evolves — check the git history for what's changed.*
+*This is a living document. OpenClaw is under active development, and parts of this guide will become outdated. I'll keep it updated as the setup evolves.*
 
 ---
 
-I've been running [OpenClaw](https://openclaw.ai) as a self-hosted personal AI assistant for a few months. The default setup is straightforward, but getting it production-hardened — isolated network, secrets managed properly, browser sandboxed, prompt injection guarded — took considerably more work than the docs suggest. This guide is the consolidated version of what I've learned.
+I've been running [OpenClaw](https://openclaw.ai) as a self-hosted personal AI assistant for a few weeks now. The default setup is straightforward, but getting it production-hardened, e.g. isolated network, secrets managed properly, browser sandboxed, prompt injection guarded — took considerably more work than the docs suggest. This guide is the consolidated version of what I've learned.
 
-The goal here isn't "quickest path to running OpenClaw." It's a setup you can actually trust: one where a compromised prompt can't exfiltrate your API keys, where your personal accounts stay untouched by bot activity, and where secrets aren't sitting in plaintext on disk.
+The goal here isn't "quickest path to running OpenClaw." It's a setup you can trust slightly more than the default: one where a compromised prompt can't exfiltrate your API keys, where your personal accounts stay untouched by bot activity, and where secrets aren't sitting in plaintext on disk.
 
 I'd suggest reading through the whole thing before starting. The sections build on each other in ways that aren't always obvious, and a few ordering decisions — particularly around Tailscale, the `openclaw` system user, and the proxy setup — matter a lot.
 
@@ -312,7 +312,7 @@ npm install -g openclaw@latest
 openclaw onboard --install-daemon
 ```
 
-The wizard walks you through choosing a provider, a messaging channel, and basic skills. Paste API keys directly to get things running — we'll switch to 1Password-injected secrets next.
+The wizard walks you through choosing a provider, a messaging channel, and basic skills. Paste API keys directly to get things running — we'll switch to 1Password-injected secrets next. I personally use OpenAI as my provider via Oauth to reuse my ChatGPT subscription. 
 
 ```bash
 openclaw status
@@ -354,7 +354,7 @@ The goal: cheap models for routine tasks, expensive ones only when needed.
   "agents": {
     "defaults": {
       "model": {
-        "primary": "openai/gpt-5-mini",
+        "primary": "openai/gpt-5-4",
         "fallbacks": [
           "google/gemini-3-flash-preview",
           "anthropic/claude-sonnet-4-5"
@@ -850,6 +850,8 @@ The `allowFrom` allowlist is not optional — without it, anyone who finds your 
 
 ### Slack
 
+**Note** I highly recommend Slack as your primary channel. The thread:session setup is very nice for keeping context isolated and running tasks in parallel. 
+
 1. Go to api.slack.com/apps → "Create New App" → "From scratch."
 2. Enable Socket Mode: Settings → Socket Mode → Toggle ON. Create an App Token with `connections:write` scope.
 3. Add Bot Scopes: `chat:write`, `channels:history`, `im:history`, `im:write`, `app_mentions:read`, `assistant:write`, `files:read`, `files:write` (and others as needed).
@@ -922,7 +924,102 @@ done | sort -r
 
 ---
 
-## 17. Quick Reference
+## 17. Claude Code Delegation via ACPX
+
+One of the more powerful things OpenClaw can do is delegate coding tasks to Claude Code as a subagent. Rather than OpenClaw trying to run code itself, it hands off structured coding prompts to Claude Code and waits for results — using [ACPX](https://github.com/openclaw/acpx), a headless CLI client for the Agent Client Protocol (ACP).
+
+The practical upside: you can authenticate Claude Code with your Claude.ai subscription (no separate API key needed for the coding agent), and OpenClaw can queue, run, and inspect Claude Code sessions programmatically.
+
+### Install Claude Code on the server
+
+```bash
+# As the openclaw user
+npm install -g @anthropic-ai/claude-code@latest
+
+# Authenticate with your Claude.ai subscription
+claude login
+# Follow the browser auth flow via SSH tunnel if needed (same approach as gogcli in Section 7)
+```
+
+Claude Code's auth token is stored in `~/.claude/`. It survives server restarts and does not require a running browser session.
+
+### Install ACPX
+
+```bash
+npm install -g acpx@latest
+
+# Verify
+acpx --version
+
+# Initialize global config
+acpx config init
+```
+
+Session state lives in `~/.acpx/`. No additional daemon is required.
+
+### Install the ACPX skill into OpenClaw
+
+This gives OpenClaw the SKILL.md reference it needs to know how to invoke ACPX correctly:
+
+```bash
+npx acpx@latest --skill install acpx
+```
+
+### Configure ACPX to use the local OpenClaw gateway
+
+Add to `~/.acpx/config.json` to point the `openclaw` agent at your local gateway instance:
+
+```json
+{
+  "defaultAgent": "claude",
+  "defaultPermissions": "approve-all",
+  "agents": {
+    "openclaw": {
+      "command": "env OPENCLAW_HIDE_BANNER=1 node scripts/run-node.mjs acp --url ws://127.0.0.1:18789 --token-file ~/.openclaw/gateway.token --session agent:main:main"
+    }
+  }
+}
+```
+
+### Test the delegation
+
+```bash
+# Ask Claude Code a coding task via ACPX
+acpx claude "explain the structure of this repo"
+
+# Named parallel sessions — useful for running multiple tasks concurrently
+acpx claude -s backend "implement token pagination"
+acpx claude -s frontend "update the API docs"
+
+# Queue a prompt without waiting for the result
+acpx claude "run the test suite and fix any failures" --no-wait
+
+# Check session status
+acpx status
+
+# View recent session history
+acpx sessions history --limit 10
+```
+
+### How it fits into the security model
+
+Claude Code runs as the `openclaw` user and inherits the Squid proxy egress restrictions from Section 11. Its outbound traffic — npm installs, GitHub API calls, documentation fetches — routes through the allowlist. If Claude Code needs to reach a domain that isn't listed, add it to `/etc/squid/allowed_domains.txt` and reload Squid.
+
+Claude Code does not have access to the browser container or its CDP port directly — that's still mediated by the OpenClaw gateway.
+
+### Egress additions for Claude Code
+
+Add these to your Squid allowlist if Claude Code needs them:
+
+```bash
+echo ".npmjs.com" | sudo tee -a /etc/squid/allowed_domains.txt
+echo ".registry.npmjs.org" | sudo tee -a /etc/squid/allowed_domains.txt
+sudo systemctl reload squid
+```
+
+---
+
+## 18. Quick Reference
 
 ### Key file locations
 
