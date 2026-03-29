@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "My OpenClaw Setup Guide"
-date: 2026-03-28
+date: 2026-03-28 08:00:00 -0700
 image: /assets/images/generated/openclaw-setup-guide-header.jpeg
 tags: [ai, infrastructure, self-hosted, security, openclaw]
 ---

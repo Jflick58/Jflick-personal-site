@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "OpenClaw: Setup Experience and Initial Thoughts"
-date: 2026-03-28
+date: 2026-03-28 12:00:00 -0700
 image: /assets/images/generated/trying-openclaw-header.jpeg
 tags: [ai, openclaw, security, infrastructure, musings]
 ---
