@@ -1,0 +1,16 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "genimg",
+	"main": "src/worker.py",
+	"compatibility_date": "2025-11-02",
+	"compatibility_flags": [
+		"python_workers",
+		"python_dedicated_snapshot"
+	],
+	"observability": {
+		"enabled": true
+	}
+	// Secrets (set via `wrangler secret put`):
+	//   GEMINI_API_KEY  – Google Gemini API key
+	//   API_KEY         – static bearer token for authenticating callers
+}
