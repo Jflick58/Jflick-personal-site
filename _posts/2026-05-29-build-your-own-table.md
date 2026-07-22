@@ -66,9 +66,9 @@ There's one engineer I work with who I think about a lot. They take an extremely
 
 ## Dress for the Job You Want
 
-![Ascending steps built from oak blocks, the top step unfinished with a brass hand plane beside it]({{ '/assets/images/generated/build-your-own-table-3.jpeg' | relative_url }})
-
 The more of these conversations I have, the more I notice that some people just seem to come out of the box with it. The organizational skills, the follow-up, the communication, the ownership. It would be easy to file those under the same heading as precociousness, as things you either have or you don't. But I was trying to explain to a junior developer I mentor that there's an old saying about dressing for the job you want, not the job you have. I'm sure HR gets sick of me dressing up as Batman, but outside of the cliche and the jokes, I think there's some reality to it.
+
+![Batman meme: my boss told me to dress for the job you want, not the job you have. Now I'm sitting in a disciplinary meeting dressed as Batman.]({{ '/assets/images/batman-dress-for-the-job.jpeg' | relative_url }})
 
 Here's the distinction. You may not have the technical knowledge or the experience that people at higher levels have, and you can't wake up tomorrow and decide to have it. Some of that only comes with time, and I respect that. But there are traits you *can* wake up tomorrow and decide to emulate: organization, communication, ownership. I've watched junior developers who are strong technically but can't seem to make one idea click, that they aren't just junior engineers anymore, they're professional software engineers, and they can take real ownership over things.
 
