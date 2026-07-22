@@ -44,6 +44,8 @@ I'll add a caveat, because I think it matters. We're entering a world where anyo
 
 ## We Infantilized Programmers
 
+![A baby sitting at an oak desk, typing seriously on a mechanical keyboard with code on the monitor]({{ '/assets/images/generated/build-your-own-table-3.jpeg' | relative_url }})
+
 I know what some people are thinking. We're collapsing a bunch of roles into the software engineer and raising expectations for no additional pay. Maybe there's a fair criticism there.
 
 But I think the premise is wrong. The view that multiple roles are collapsing *into* software engineering assumes we were right to strip those expectations out in the first place. I'd argue we weren't. I think we hyper-optimized the software engineering role into a pure programming role, and in doing so we did a lot of engineers a disservice. Instead of complete professionals who understand the product end to end and can organize themselves, we built code jockeys. That's part of the struggle now.
