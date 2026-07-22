@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Build Your Own Table"
-date: 2026-05-29
+date: 2026-07-22
 image: /assets/images/generated/build-your-own-table-header.jpeg
 tags: [career, ai, software development, engineering management, mentorship, musings]
 ---
