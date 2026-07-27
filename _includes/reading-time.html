@@ -1,0 +1,8 @@
+{%- comment -%}
+Estimated reading time at 200 words per minute.
+Usage: {% include reading-time.html content=post.content %}
+{%- endcomment -%}
+{%- assign words = include.content | strip_html | number_of_words: "auto" -%}
+{%- assign minutes = words | divided_by: 200.0 | round -%}
+{%- if minutes < 1 -%}{%- assign minutes = 1 -%}{%- endif -%}
+{{ minutes }} min read
