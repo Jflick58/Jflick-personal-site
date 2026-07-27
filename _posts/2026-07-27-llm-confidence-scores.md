@@ -12,7 +12,7 @@ If someone sent you this post, you have probably tried to extrude a confidence s
 
 I've now had this conversation at multiple companies with multiple people, and I've had it enough times that it seems like there's a broader misunderstanding at work here. So my hope is that I can just send people this post instead of relitigating it in a thread every six months.
 
-The short version: asking an LLM to generate a score for how confident it is in its own response is, from everything I can tell, complete bullcrap.
+The short version: asking an LLM to generate a score for how confident it is in its own response is, from everything I can tell, completely useless.
 
 I want to be upfront that I'd love to be wrong about this. There are people much, much smarter than me working in this space (and I work with many of them!). If you can rebut any of the arguments below, or point me at research I haven't read, I would genuinely enjoy that conversation. But absent that, these are my current thoughts as I understand them.
 
