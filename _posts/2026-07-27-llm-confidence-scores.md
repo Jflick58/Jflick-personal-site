@@ -24,6 +24,8 @@ That continuous scale is what really grinds my gears, and I'll come back to why.
 
 ## LLMs Cannot Rank the Confidence of Their Own Responses
 
+![Two facing brass-framed mirrors reflecting each other into an endless receding tunnel]({{ '/assets/images/generated/llm-confidence-scores-1.jpeg' | relative_url }})
+
 I recognize that Anthropic and others have published research arguing that models maintain some kind of latent internal state while they generate. Anthropic's interpretability work on [tracing the thoughts of a language model](https://www.anthropic.com/research/tracing-thoughts-language-model) found that Claude plans several words ahead when writing a rhyming couplet, which is not the behavior you'd predict from a naive next-token story. And their more recent work on [emergent introspective awareness](https://transformer-circuits.pub/2025/introspection/index.html) found that models can sometimes notice concepts injected into their activations and report on them accurately.
 
 That's real, and it's interesting. But read the caveat the researchers themselves put on it: the capability is highly unreliable and highly context-dependent. We do not currently have a strong enough understanding of that internal state to assert that models have any usable ability to assess their own correctness. Noticing that something was injected into your activations under laboratory conditions is a very long way from quantifying how likely your paragraph about a customer's refund policy is to be right.
@@ -44,7 +46,7 @@ Is the model confident in the correctness of the response? In the coherence of t
 
 ## Confidence Isn't Uniform Across a Response
 
-![Oak blocks of varying heights with a single straight brass rod laid across the tallest few]({{ '/assets/images/generated/llm-confidence-scores-1.jpeg' | relative_url }})
+![Oak blocks of varying heights with a single straight brass rod laid across the tallest few]({{ '/assets/images/generated/llm-confidence-scores-2.jpeg' | relative_url }})
 
 There's another problem with treating this as a single number, and it goes back to internal state.
 
@@ -86,7 +88,7 @@ I'd expect a model's training data to be strong enough that if I asked it to che
 
 ## Every Line of a Prompt Is a Liability
 
-![A brass pendulum frozen at the far end of its swing, past the center mark scored into an oak base]({{ '/assets/images/generated/llm-confidence-scores-2.jpeg' | relative_url }})
+![A brass pendulum frozen at the far end of its swing, past the center mark scored into an oak base]({{ '/assets/images/generated/llm-confidence-scores-3.jpeg' | relative_url }})
 
 I want to take a detour, because this is the part I think people underestimate most.
 
