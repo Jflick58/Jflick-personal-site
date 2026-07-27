@@ -36,13 +36,13 @@ Say we want to tap into the thinking trace and use it to evaluate the self-corre
 
 Do I think reflective reasoning patterns help models catch some of their own errors? Yes. Do I think models currently have a sufficient understanding of their own state to *quantify* that? No. It's also worth noting that the research on intrinsic self-correction is not especially encouraging on this front. The DeepMind paper [Large Language Models Cannot Self-Correct Reasoning Yet](https://arxiv.org/abs/2310.01798) found that when models attempt to correct their initial responses using only their inherent capabilities, without external feedback, performance often *degrades*.
 
-## Confident Of What, Exactly?
+## Confident of What, Exactly?
 
 Here's the question I now ask immediately whenever someone requests a confidence score: what is your heuristic for confidence?
 
 Because "confidence" gets ambiguous extremely fast. Not slightly ambiguous. Extremely.
 
-Is the model confident in the correctness of the response? In the coherence of the response? That it has attempted to fulfill the goal of the user's request? Those are three completely different questions with three completely different failure modes, and a single float between 0 and 1 flattens all of them into the same number. Absent some heuristic that bounds the concept, these scores are effectively useless.
+Is the model confident in the correctness of the response? In the coherence of the response? That it has attempted to fulfill the goal of the user's request? Those are three completely different questions with three completely different failure modes, and a single float between 0 and 100 flattens all of them into the same number. Absent some heuristic that bounds the concept, these scores are effectively useless.
 
 ## Confidence Isn't Uniform Across a Response
 
@@ -60,7 +60,7 @@ As a side note, I think "LLMs just lossily predict the next token" has become a 
 
 Even there, the problem is that tokens are not uniform. If I'm generating the first hundred words of a response, every single token has its own likelihood value. Some of those are structural glue with near-certain probabilities. Some of them are the load-bearing factual claim in the entire paragraph. Collapsing that distribution into one number that the model then verbalizes is not a measurement. It's a vibe.
 
-This isn't just my intuition. It's the reason an entire research line exists to route around raw token probabilities. Semantic entropy, introduced by Farquhar, Kossen, Kuhn, and Gal in [Nature](https://www.nature.com/articles/s41586-024-07421-0), samples a model repeatedly, clusters the responses by meaning rather than by wording, and measures the entropy across those meaning clusters. The reason to go to that trouble is that token-level likelihood conflates *I could have phrased this five different ways* with *I don't actually know this*. And note what the method requires: multiple samples and an external comparison step. It's a measurement performed on the model from the outside, not a number the model reports about itself.
+This isn't just my intuition. It's the reason an entire research line exists to route around raw token probabilities. Semantic entropy, introduced by Farquhar et al. in [Nature](https://www.nature.com/articles/s41586-024-07421-0), samples a model repeatedly, clusters the responses by meaning rather than by wording, and measures the entropy across those meaning clusters. The reason to go to that trouble is that token-level likelihood conflates *I could have phrased this five different ways* with *I don't actually know this*. And note what the method requires: multiple samples and an external comparison step. It's a measurement performed on the model from the outside, not a number the model reports about itself.
 
 I've gone looking, and from every piece of research I've been able to find, I can't locate a scenario where these self-reported scores demonstrate the kind of validity people assume they have when they put them in a JSON schema.
 
@@ -70,7 +70,7 @@ I want to be clear that I'm not claiming it's impossible to get some reliable in
 
 That work would look something like this. You'd need a strong prompt calibration process in which you define actual heuristics for the model to self-classify against, preferably across a small set of categorical labels rather than a continuous 0-to-100 scale. Then you'd need a lot of calibration and prompt optimization to demonstrate, over some sufficiently large *n* of responses, that the scores are actually truthy.
 
-The research here is more supportive than my general position might suggest, and I want to represent it fairly. Lin, Hilton, and Evans showed in [Teaching Models to Express Their Uncertainty in Words](https://arxiv.org/abs/2205.14334) that a model can be trained to emit calibrated verbal confidence, though notably they fine-tuned on a purpose-built task distribution to get there. Tian et al. found in [Just Ask for Calibration](https://arxiv.org/abs/2305.14975) that with the right prompting strategy, RLHF'd models verbalize probabilities that are better calibrated than the model's own conditional probabilities, and that prompting plus temperature scaling can cut expected calibration error by more than half. And Anthropic's [Language Models (Mostly) Know What They Know](https://arxiv.org/abs/2207.05221) found encouraging results asking models to estimate the probability that their own proposed answer is true.
+The research here is more supportive than my general position might suggest, and I want to represent it fairly. Lin et al. showed in [Teaching Models to Express Their Uncertainty in Words](https://arxiv.org/abs/2205.14334) that a model can be trained to emit calibrated verbal confidence, though notably they fine-tuned on a purpose-built task distribution to get there. Tian et al. found in [Just Ask for Calibration](https://arxiv.org/abs/2305.14975) that with the right prompting strategy, RLHF'd models verbalize probabilities that are better calibrated than the model's own conditional probabilities, and that prompting plus temperature scaling can cut expected calibration error by more than half. And Anthropic's [Language Models (Mostly) Know What They Know](https://arxiv.org/abs/2207.05221) found encouraging results asking models to estimate the probability that their own proposed answer is true.
 
 These are the strongest counters to my argument I can find. But if you look at the caveats that come with these approaches (fine-tuning, or a deliberately chosen prompting strategy, or a constrained answer format, or explicit post-hoc scaling), that's the extra work you have to do that you don't get out of the box. It is not what happens when you add `"confidence": number` to a Pydantic model and ship it.
 
@@ -110,7 +110,7 @@ Absent a sufficiently holistic, goal-oriented rubric that grounds your optimizat
 
 This is a big part of why I now try to write the most minimal prompts I can get away with. Partly because minimal prompts let me evaluate the actual causal capability of a given model rather than measuring how well I've tuned around it. That's the persistent downside of aggressive prompt optimization: you're optimizing against a specific model and architecture, so swapping models becomes a project. This has gotten much better, to be fair. Compared to the GPT-4o days, where changing providers meant substantial rework, today's models are forgiving enough that you can often drop in a replacement. But the effect hasn't disappeared, even between model sizes within a single provider. Moving between Sonnet and Opus can still surface places where you've overfit. Mostly, though, minimal prompts help me avoid the overcorrection problem before it starts.
 
-All of which is to say: the path to a reliable confidence score runs directly through the kind of prompt optimization that I've watched produce bad second and third-order effects over and over.
+All of which is to say: the path to a reliable confidence score runs directly through the kind of prompt optimization that I've watched produce bad second- and third-order effects over and over.
 
 ## If the Model Knows It's Wrong, I Want It to Fix It
 
@@ -126,7 +126,7 @@ There's no third option that I can see. Which is why I don't think these scores 
 
 If your confidence score is a proxy for correctness, and your correctness heuristic is grounding in retrieved sources, then what you actually have is a retrieval problem. So put the energy there.
 
-I don't think this is a solved problem at any level of the industry, and I want to be clear that I'm not just talking about the systems I've worked on. I see it in commercially available frontier products. I see it in deep research features and web search features from the labs themselves. I see it in Perplexity. The other day I was using ChatGPT to research BBQ competitions, asked it about entry deadlines, and it returned one from 2024, with a cited source. Not a subtle failure. And the question I'm left with isn't "why didn't the model tell me it was unsure." It's why, in its search and in its selection of which documents to trust, it made an obviously wrong choice.
+I don't think this is a solved problem at any level of the industry, and I want to be clear that I'm not just talking about the systems I've worked on. I see it in commercially available frontier products. I see it in deep research features and web search features from the labs themselves. I see it in Perplexity. The other day I was using ChatGPT to research BBQ competitions. I asked it about entry deadlines and it returned one from 2024, with a cited source. Not a subtle failure. And the question I'm left with isn't "why didn't the model tell me it was unsure." It's why, in its search and in its selection of which documents to trust, it made an obviously wrong choice.
 
 A model's retrieval is only as good as the information fed into it and the quality of the search it performs. That's where I'd spend the effort.
 
@@ -136,6 +136,6 @@ Sometimes it feels like what people really want out of these RAG systems is the 
 
 ## Things Move Fast
 
-So, in conclusion: I struggle to see the value in getting a model to output a confidence score, and I struggle to see a way to have it do so reliably. There may be a version of this that works with serious prompt calibration and a small set of well-defined categorical labels, but I think the second and third-order effects of that calibration would likely be negative, and I've yet to meet anyone who wanted the score badly enough to find out. And as you scrutinize what you actually intend to *do* with the number, the whole thing tends to fall apart under a bit of critical logic.
+So, in conclusion: I struggle to see the value in getting a model to output a confidence score, and I struggle to see a way to have it do so reliably. There may be a version of this that works with serious prompt calibration and a small set of well-defined categorical labels, but I think the second- and third-order effects of that calibration would likely be negative, and I've yet to meet anyone who wanted the score badly enough to find out. And as you scrutinize what you actually intend to *do* with the number, the whole thing tends to fall apart under a bit of critical logic.
 
 Like I say in most writings where I make an argument, I'm super open to being wrong here, so if you've got the paper that changes my mind, please send it.
