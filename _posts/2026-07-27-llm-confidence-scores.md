@@ -62,7 +62,7 @@ Even there, the problem is that tokens are not uniform. If I'm generating the fi
 
 This isn't just my intuition. It's the reason an entire research line exists to route around raw token probabilities. Semantic entropy, introduced by Farquhar, Kossen, Kuhn, and Gal in [Nature](https://www.nature.com/articles/s41586-024-07421-0), samples a model repeatedly, clusters the responses by meaning rather than by wording, and measures the entropy across those meaning clusters. The reason to go to that trouble is that token-level likelihood conflates *I could have phrased this five different ways* with *I don't actually know this*. And note what the method requires: multiple samples and an external comparison step. It's a measurement performed on the model from the outside, not a number the model reports about itself.
 
-And I've gone looking. From every piece of research I've been able to find, I can't locate a scenario where these self-reported scores demonstrate the kind of validity people assume they have when they put them in a JSON schema.
+I've gone looking, and from every piece of research I've been able to find, I can't locate a scenario where these self-reported scores demonstrate the kind of validity people assume they have when they put them in a JSON schema.
 
 ## If You Really Wanted One, Here's the Work
 
