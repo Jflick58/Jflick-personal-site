@@ -50,11 +50,17 @@ Is the model confident in the correctness of the response? In the coherence of t
 
 There's another problem with treating this as a single number, and it goes back to internal state.
 
-In traditional machine learning, we have real mechanisms for this. Confidence intervals. Classifiers that output a score that at least serves as a legitimate proxy for confidence. The closest analog an LLM has is the predicted likelihood of each next token.
+In traditional machine learning, we have real mechanisms for this. A classifier can output a score that at least serves as a legitimate proxy for confidence, and in a regression setting you can put a prediction interval around an estimate.
+
+I want to be careful with that comparison, because classical models don't hand you a trustworthy number for free either. Guo et al. showed in [On Calibration of Modern Neural Networks](https://arxiv.org/abs/1706.04599) that modern networks are systematically overconfident, and that raw softmax outputs need post-hoc correction. The difference is that we have an agreed-upon methodology for doing that correction. Platt scaling, isotonic regression, temperature scaling, all fit against held-out ground truth and checked with reliability diagrams and Brier scores. The number earns trust by being measured against reality, and we have a way to check whether that measurement still holds.
+
+That machinery is exactly what's missing when someone adds a confidence key to a JSON schema. The closest analog an LLM has natively is the predicted likelihood of each next token.
 
 As a side note, I think "LLMs just lossily predict the next token" has become a real oversimplification of where these systems are, especially once you account for reasoning, adaptive thinking, post-training, and the classifiers running on top of the response. But set that aside and take the most simplistic version.
 
 Even there, the problem is that tokens are not uniform. If I'm generating the first hundred words of a response, every single token has its own likelihood value. Some of those are structural glue with near-certain probabilities. Some of them are the load-bearing factual claim in the entire paragraph. Collapsing that distribution into one number that the model then verbalizes is not a measurement. It's a vibe.
+
+This isn't just my intuition. It's the reason an entire research line exists to route around raw token probabilities. Semantic entropy, introduced by Farquhar, Kossen, Kuhn, and Gal in [Nature](https://www.nature.com/articles/s41586-024-07421-0), samples a model repeatedly, clusters the responses by meaning rather than by wording, and measures the entropy across those meaning clusters. The reason to go to that trouble is that token-level likelihood conflates *I could have phrased this five different ways* with *I don't actually know this*. And note what the method requires: multiple samples and an external comparison step. It's a measurement performed on the model from the outside, not a number the model reports about itself.
 
 And I've gone looking. From every piece of research I've been able to find, I can't locate a scenario where these self-reported scores demonstrate the kind of validity people assume they have when they put them in a JSON schema.
 
