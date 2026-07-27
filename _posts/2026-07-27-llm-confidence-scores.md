@@ -92,7 +92,7 @@ I want to take a detour, because this is the part I think people underestimate m
 
 At this point I've been working on LLM experiences for several years, and I cannot tell you how many times I've watched a team go off the rails by tuning a prompt to correct a specific issue and overcorrecting straight past the target.
 
-One example sticks with me. In one of our support experiences, we had a problem where the LLM wasn't reliably finding the documents that detailed our escalation process. So we did some prompt optimization against some ad hoc evals to correct it. And we shifted it so far that the model then *always* found an escalation path immediately, without ever considering what our frontline advisors could resolve themselves. We'd spent months responding to feedback to produce a system that had learned exactly the wrong lesson.
+One example sticks with me. In one of our support experiences, we had a problem where the LLM wasn't reliably finding the documents that detailed our escalation process. So we did some prompt optimization against some ad hoc evals to correct it. And we shifted it so far that the model then *often* found an escalation path immediately, without ever considering what our frontline advisors could resolve themselves. We'd spent months responding to feedback to produce a system that had learned exactly the wrong lesson.
 
 I laugh about it now, but it's the example that made something click for me. Much like how every line of code is a liability, every line of a prompt is a liability, because each one expands the latent space around the outcome you're trying to drive. Models are as good at inferring the space around what you *didn't* say as they are at adhering to what you did.
 
