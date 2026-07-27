@@ -124,7 +124,7 @@ I'd also push back gently on the framing that motivates a lot of these requests.
 
 Sometimes it feels like what people really want out of these RAG systems is the thing we had before. I built chatbots back in 2017 when everything was intent-based (shoutout to the Covered California chatbot back in the day, IYKYK), and you'd try to enumerate the whole spectrum of possible user intents and map each one to a specific condition. You could wire those intents through something like Microsoft's [LUIS](https://learn.microsoft.com/en-us/azure/ai-services/luis/what-is-luis) into a knowledge management tool and retrieve specific, cited information every time. Deterministic and auditable, and also brittle and incapable of anything you hadn't anticipated. I understand the pull. It's hard to trust a system that can be wrong in ways you didn't enumerate. But asking for a confidence score is trying to buy back that determinism with a number the model made up.
 
-## I'd Like to Be Wrong
+## Things Move Fast
 
 So, in conclusion: I struggle to see the value in getting a model to output a confidence score, and I struggle to see a way to have it do so reliably. There may be a version of this that works with serious prompt calibration and a small set of well-defined categorical labels, but I think the second and third-order effects of that calibration would likely be negative, and I've yet to meet anyone who wanted the score badly enough to find out. And as you scrutinize what you actually intend to *do* with the number, the whole thing tends to fall apart under a bit of critical logic.
 
