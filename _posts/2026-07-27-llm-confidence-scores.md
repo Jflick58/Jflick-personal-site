@@ -76,6 +76,8 @@ Which brings me to a related gripe. LLMs do function decently as ad hoc classifi
 
 ## Confidence Is Almost Always a Proxy for Correctness
 
+![A level brass balance scale holding a solid oak cube on one pan and a hollow brass box of the same size on the other]({{ '/assets/images/generated/llm-confidence-scores-3.jpeg' | relative_url }})
+
 At least the way I've seen it used in practice, "confidence" is really a stand-in for correctness, or for certainty. Which makes it another variation of the factuality and grounding problem wearing a different hat.
 
 Case in point: most of the examples I encounter are RAG use cases. Somebody wants the model to indicate whether it's confident it retrieved the right documents, pulled the data it actually needed, and that its response is accurate to what it pulled. It's being used as a trust signal.
@@ -88,7 +90,7 @@ I'd expect a model's training data to be strong enough that if I asked it to che
 
 ## Every Line of a Prompt Is a Liability
 
-![A brass pendulum frozen at the far end of its swing, past the center mark scored into an oak base]({{ '/assets/images/generated/llm-confidence-scores-3.jpeg' | relative_url }})
+![A brass pendulum frozen at the far end of its swing, past the center mark scored into an oak base]({{ '/assets/images/generated/llm-confidence-scores-4.jpeg' | relative_url }})
 
 I want to take a detour, because this is the part I think people underestimate most.
 
