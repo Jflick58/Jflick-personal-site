@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://justinflick.com/pr-preview/pr-15/feed.xml" rel="self" type="application/atom+xml" /><link href="https://justinflick.com/pr-preview/pr-15/" rel="alternate" type="text/html" /><updated>2026-07-27T05:42:34+00:00</updated><id>https://justinflick.com/pr-preview/pr-15/feed.xml</id><title type="html">Justin Flick</title><subtitle>Musings on Data Science/Engineering, Software Development, and Corporate Management.</subtitle><author><name>Justin Flick</name></author><entry><title type="html">Why I Hate LLM Confidence Scores</title><link href="https://justinflick.com/pr-preview/pr-15/2026/07/27/llm-confidence-scores.html" rel="alternate" type="text/html" title="Why I Hate LLM Confidence Scores" /><published>2026-07-27T00:00:00+00:00</published><updated>2026-07-27T00:00:00+00:00</updated><id>https://justinflick.com/pr-preview/pr-15/2026/07/27/llm-confidence-scores</id><content type="html" xml:base="https://justinflick.com/pr-preview/pr-15/2026/07/27/llm-confidence-scores.html"><![CDATA[<h2 id="hello-reader">Hello, Reader</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://justinflick.com/pr-preview/pr-15/feed.xml" rel="self" type="application/atom+xml" /><link href="https://justinflick.com/pr-preview/pr-15/" rel="alternate" type="text/html" /><updated>2026-07-27T05:53:55+00:00</updated><id>https://justinflick.com/pr-preview/pr-15/feed.xml</id><title type="html">Justin Flick</title><subtitle>Musings on Data Science/Engineering, Software Development, and Corporate Management.</subtitle><author><name>Justin Flick</name></author><entry><title type="html">Why I Hate LLM Confidence Scores</title><link href="https://justinflick.com/pr-preview/pr-15/2026/07/27/llm-confidence-scores.html" rel="alternate" type="text/html" title="Why I Hate LLM Confidence Scores" /><published>2026-07-27T00:00:00+00:00</published><updated>2026-07-27T00:00:00+00:00</updated><id>https://justinflick.com/pr-preview/pr-15/2026/07/27/llm-confidence-scores</id><content type="html" xml:base="https://justinflick.com/pr-preview/pr-15/2026/07/27/llm-confidence-scores.html"><![CDATA[<h2 id="hello-reader">Hello, Reader</h2>
 
 <p>If someone sent you this post, you have probably tried to extrude a confidence score out of an LLM.</p>
 
@@ -68,8 +68,6 @@
 
 <h2 id="confidence-is-almost-always-a-proxy-for-correctness">Confidence Is Almost Always a Proxy for Correctness</h2>
 
-<p><img src="/pr-preview/pr-15/assets/images/generated/llm-confidence-scores-3.jpeg" alt="A level brass balance scale holding a solid oak cube on one pan and a hollow brass box of the same size on the other" /></p>
-
 <p>At least the way I’ve seen it used in practice, “confidence” is really a stand-in for correctness, or for certainty. Which makes it another variation of the factuality and grounding problem wearing a different hat.</p>
 
 <p>Case in point: most of the examples I encounter are RAG use cases. Somebody wants the model to indicate whether it’s confident it retrieved the right documents, pulled the data it actually needed, and that its response is accurate to what it pulled. It’s being used as a trust signal.</p>
@@ -82,7 +80,7 @@
 
 <h2 id="every-line-of-a-prompt-is-a-liability">Every Line of a Prompt Is a Liability</h2>
 
-<p><img src="/pr-preview/pr-15/assets/images/generated/llm-confidence-scores-4.jpeg" alt="A brass pendulum frozen at the far end of its swing, past the center mark scored into an oak base" /></p>
+<p><img src="/pr-preview/pr-15/assets/images/generated/llm-confidence-scores-3.jpeg" alt="A brass pendulum frozen at the far end of its swing, past the center mark scored into an oak base" /></p>
 
 <p>I want to take a detour, because this is the part I think people underestimate most.</p>
 
