@@ -22,7 +22,7 @@ The pattern shows up everywhere. Chat-based outputs, structured outputs, agentic
 
 That continuous scale is what really grinds my gears, and I'll come back to why. But the broader problem is that there's no scientific validity behind any of it. What you have built is a psychological safety trick. It makes the output *feel* more trustworthy without making it more trustworthy, and I'd argue the people shipping this experience are mostly lying to themselves about what they've shipped.
 
-## LLMs Cannot Rank the Confidence of Their Own Responses
+## LLMs Cannot Reliably Quantify Their Own Confidence
 
 ![Two facing brass-framed mirrors reflecting each other into an endless receding tunnel]({{ '/assets/images/generated/llm-confidence-scores-1.jpeg' | relative_url }})
 
