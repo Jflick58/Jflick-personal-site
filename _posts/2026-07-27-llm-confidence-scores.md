@@ -14,7 +14,7 @@ I've now had this conversation at multiple companies with multiple people, and I
 
 The short version: asking an LLM to generate a score for how confident it is in its own response is, from everything I can tell, complete bullcrap.
 
-I want to be upfront that I'd love to be wrong about this. There are people much, much smarter than me working in this space, and I work with a lot of them. If you can rebut any of the arguments below, or point me at research I haven't read, I would genuinely enjoy that conversation. But absent that, these are my current thoughts as I understand them.
+I want to be upfront that I'd love to be wrong about this. There are people much, much smarter than me working in this space (and I work with many of them!). If you can rebut any of the arguments below, or point me at research I haven't read, I would genuinely enjoy that conversation. But absent that, these are my current thoughts as I understand them.
 
 ## What I Keep Seeing
 
