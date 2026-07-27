@@ -82,7 +82,7 @@ Here's where I think that gets genuinely risky, and it's not the objection peopl
 
 There's also a cost problem hiding in that heuristic. If correctness means "cited in an external source," how do you validate a fact that came from training data? You end up spending retrieval calls on things that are self-evident. I don't want my LLM making a web search call to find out whether the sky is blue. That's a waste of my time and a waste of my tokens.
 
-I'd expect a model's training data to be strong enough that if I asked it to check the claims in its own response, it could handle "the sky is blue" without assistance. Absent some new development in chemical or biological warfare, that one is settled. Where it gets genuinely hard is specific business logic for a process the model has been asked to operate inside of, and that's exactly where you start losing the synthesis and the intuition that made the model useful in the first place.
+I'd expect a model's training data to be strong enough that if I asked it to check the claims in its own response, it could handle "the sky is blue" without assistance. Absent some ecological phenomenon, or chemical/biological warfare, that one is settled. Where it gets genuinely hard is specific business logic for a process the model has been asked to operate inside of, and that's exactly where you start losing the synthesis and the intuition that made the model useful in the first place.
 
 ## Every Line of a Prompt Is a Liability
 
