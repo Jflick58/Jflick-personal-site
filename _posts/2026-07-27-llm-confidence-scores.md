@@ -128,6 +128,4 @@ Sometimes it feels like what people really want out of these RAG systems is the 
 
 So, in conclusion: I struggle to see the value in getting a model to output a confidence score, and I struggle to see a way to have it do so reliably. There may be a version of this that works with serious prompt calibration and a small set of well-defined categorical labels, but I think the second and third-order effects of that calibration would likely be negative, and I've yet to meet anyone who wanted the score badly enough to find out. And as you scrutinize what you actually intend to *do* with the number, the whole thing tends to fall apart under a bit of critical logic.
 
-Like I say in most writings where I make an argument, I'm super open to being wrong here.
-
-If you've got the paper that changes my mind, please send it.
+Like I say in most writings where I make an argument, I'm super open to being wrong here, so if you've got the paper that changes my mind, please send it.
