@@ -65,6 +65,11 @@ Not every post needs all six sections. But the opening must establish stakes, an
 - "Unless you work in the slowest-moving organization on planet earth..."
 - Light sarcasm is fine; cynicism is not
 
+**Parenthetical asides**
+- The author uses parentheses liberally for qualifications, side comments, and asides (often mid-sentence)
+- Prefer parentheses over paired commas for asides: "We use Tangle at Shopify (which is open source)" rather than "We use Tangle at Shopify, which is open source,"
+- A draft with few or no parentheses reads as off-voice
+
 ---
 
 ## What to Preserve from a Raw Transcript
