@@ -14,7 +14,7 @@ But I think we've gone too far in the YAGNI direction, especially in the world o
 
 ## The Load-Bearing Word Is "Gonna"
 
-If you actually read [Fowler's writeup on YAGNI](https://martinfowler.com/bliki/YAGNI.html), he and Beck are more careful than the acronym's popular usage. Beck's formulation is to implement things when you actually need them, never because you foresee needing them. Fowler scopes the whole principle to *presumptive features*: capabilities you're building on a guess. Which means YAGNI turns entirely on a prediction. It's only a violation if you weren't going to need it, and the acronym is (grammatically speaking) a confident forecast about the future.
+If you actually read [Fowler's writeup on YAGNI](https://martinfowler.com/bliki/Yagni.html), he and Beck are more careful than the acronym's popular usage. Beck's formulation is to implement things when you actually need them, never because you foresee needing them. Fowler scopes the whole principle to *presumptive features*: capabilities you're building on a guess. Which means YAGNI turns entirely on a prediction. It's only a violation if you weren't going to need it, and the acronym is (grammatically speaking) a confident forecast about the future.
 
 So the interesting question, the one the acronym skips right past, is this: what's your framework for knowing whether you're going to need it?
 
