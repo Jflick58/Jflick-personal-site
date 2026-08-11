@@ -19,6 +19,7 @@ Primary reference: "Thoughts on Technical Hiring" (2023 post). All future posts 
 - Composed and formal (closer to a prepared talk than thinking aloud)
 - Intellectually humble but confident in recommendations
 - Comfortable using: "I'd suggest", "I'd argue", "arguably", "in all likelihood"
+- Frames contrarian recommendations as arguments to consider ("My argument is that we should consider the opposite"), not settled personal doctrine
 - Avoids: "It's clear that", "Obviously", "Simply", "needless to say"
 
 ---
@@ -96,6 +97,7 @@ Not every post needs all six sections. But the opening must establish stakes, an
 
 - **No em dashes (—).** This is a hard rule. Em dashes are one of the clearest signals of AI-generated writing. Rewrite the sentence instead: split it in two, use a comma, use parentheses, or restructure. No exceptions.
 - **No AI filler words:** "meaningful" as a vague modifier, "fundamentally"/"substantially" as intensifiers, "robust", "navigate"/"landscape" used figuratively, "crystallizes", "delve", "nuanced", "multifaceted"
+- **Don't swap in a cuter synonym for the punchline.** Close an argument in the vocabulary the section established ("the economics changed", not "the prices changed").
 
 ---
 
@@ -117,6 +119,12 @@ tags: [tag1, tag2]
 
 **Headers**
 - H2 only (`##`) — no H3 subheadings
+- Avoid headers that read as AI-written: tidy antithesis constructions ("X, Not a Y") and headers that cleanly summarize the section's thesis
+- Prefer headers that are specific and slightly oblique: a concrete image ("Prompting Against the Grain"), a first-person stance ("The YAGNI I Actually Encounter"), or a load-bearing detail from the argument (The Load-Bearing Word Is "Gonna")
+- A post may open cold with body text before any H2 when the opening is definitional or scene-setting; don't add a header whose only job is announcing the intro
+
+**Acronyms**
+- Fully capitalized in prose (YAGNI, never Yagni or yagni), even when a cited source styles them otherwise; URLs keep the source's casing
 
 **Emphasis**
 - **Bold** for key terms in bullets or labeled framework steps
@@ -129,3 +137,4 @@ tags: [tag1, tag2]
 **Links**
 - External links for citations and references
 - Inline, not footnoted
+- Jokes and cultural references can carry links too (the *cough* [rule of three](…) *cough* pattern); a link inside a parenthetical aside is characteristic

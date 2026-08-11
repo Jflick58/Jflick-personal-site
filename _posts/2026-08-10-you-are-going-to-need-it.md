@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "You Are Going to Need It"
-date: 2026-08-05
+date: 2026-08-10
 image: /assets/images/generated/you-are-going-to-need-it-header.jpeg
 tags: [software development, abstractions, engineering principles, ai, musings]
 ---
