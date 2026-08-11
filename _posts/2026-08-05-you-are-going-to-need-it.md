@@ -106,6 +106,6 @@ I've written before that [we infantilized programmers]({% post_url 2026-07-22-bu
 
 As with everything I write, this is just my perspective. It may change over time, and I may be wrong. That's fine with me, and I'm open to the alternative.
 
-I also don't have a clean rule for when to abstract and when not to, and I don't think one exists. That's part of why "you aren't gonna need it" is so appealing as a default (it's a rule, and rules are easier than judgment). What I'd push back on is treating it as the thing you do until proven otherwise, which is the framework I think a lot of engineers, and now a lot of agent skills, are operating under.
+I also don't have a clean rule for when to abstract and when not to, and I don't think one exists (*cough* [rule of three](https://en.wikipedia.org/wiki/Rule_of_three_%28computer_programming%29) *cough*). That's part of why "you aren't gonna need it" is so appealing as a default (it's a rule, and rules are easier than judgment). What I'd push back on is treating it as the thing you do until proven otherwise, which is the framework I think a lot of engineers, and now a lot of agent skills, are operating under.
 
 There's something to be said for the art of picking good abstractions and writing high-quality code, and a reflexive YAGNI can be detrimental to developing the engineer who is both good and fast. It's the equivalent of playing the notes with no dynamics and no flair. The notes are right. It just isn't music.
